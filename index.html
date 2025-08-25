@@ -2,166 +2,184 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>特設サイト</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/desktop.css" media="(min-width: 769px)">
-    <link rel="stylesheet" href="styles/mobile.css" media="(max-width: 768px)">
-    <script src="scripts/device-detector.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント展示サイト</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- ナビゲーション -->
-    <nav class="navbar" id="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">LOGO</div>
-            <div class="nav-menu" id="nav-menu">
-                <a href="#home" class="nav-link">Home</a>
-                <a href="#about" class="nav-link">About</a>
-                <a href="#gallery" class="nav-link">Gallery</a>
-                <a href="#contact" class="nav-link">Contact</a>
-            </div>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <!-- メインタイトル（常時表示） -->
+    <header class="main-header">
+        <h1 class="main-title">
+            <span class="title-word">Event</span>
+            <span class="title-word">Showcase</span>
+            <span class="title-word">2025</span>
+        </h1>
+        <div class="subtitle">自動スライドショー展示中</div>
+    </header>
 
-    <!-- ヒーローセクション -->
-    <section class="hero" id="home">
-        <div class="floating-elements">
-            <div class="float-item"></div>
-            <div class="float-item"></div>
-            <div class="float-item"></div>
-            <div class="float-item"></div>
+    <!-- 背景アニメーション要素 -->
+    <div class="background-animation">
+        <div class="floating-shape circle"></div>
+        <div class="floating-shape triangle"></div>
+        <div class="floating-shape square"></div>
+        <div class="floating-shape hexagon"></div>
+        <div class="floating-shape circle"></div>
+        <div class="floating-shape triangle"></div>
+        <div class="wave-container">
+            <div class="wave"></div>
+            <div class="wave"></div>
+            <div class="wave"></div>
         </div>
-        <div class="hero-content">
-            <h1 class="hero-title" data-text="特設サイト">特設サイト</h1>
-            <p class="hero-subtitle">ポップで動きのあるWebサイト</p>
-            <button class="cta-button" id="cta-btn">
-                <span>詳細を見る</span>
-                <div class="ripple"></div>
-            </button>
-        </div>
-        <div class="scroll-indicator">
-            <div class="scroll-arrow"></div>
-        </div>
-    </section>
+    </div>
 
-    <!-- コンセプトセクション -->
-    <section class="concept" id="about">
-        <div class="container">
-            <h2 class="section-title">Our Concept</h2>
-            <div class="concept-grid">
-                <div class="concept-card" data-aos="slide-up">
-                    <div class="card-icon">🚀</div>
-                    <h3>革新的</h3>
-                    <p>最新技術を駆使した革新的なアプローチ</p>
-                </div>
-                <div class="concept-card" data-aos="slide-up" data-delay="200">
-                    <div class="card-icon">✨</div>
-                    <h3>美しい</h3>
-                    <p>洗練されたデザインと美しいアニメーション</p>
-                </div>
-                <div class="concept-card" data-aos="slide-up" data-delay="400">
-                    <div class="card-icon">⚡</div>
-                    <h3>高速</h3>
-                    <p>軽量で高速なパフォーマンス</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 特徴セクション -->
-    <section class="features">
-        <div class="container">
-            <h2 class="section-title">Features</h2>
-            <div class="features-slider" id="features-slider">
-                <div class="feature-slide active">
-                    <div class="feature-image">
-                        <div class="placeholder-img">IMAGE 1</div>
+    <!-- メインコンテンツエリア -->
+    <main class="main-content">
+        <!-- 画像スライドショー -->
+        <section class="slideshow-container">
+            <div class="slide-wrapper">
+                <div class="slide active" data-title="プロジェクト Alpha">
+                    <div class="slide-image">
+                        <div class="placeholder-image gradient-1">
+                            <div class="image-text">Project Alpha</div>
+                            <div class="image-icon">🚀</div>
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h3>レスポンシブデザイン</h3>
-                        <p>あらゆるデバイスに対応したレスポンシブデザイン</p>
+                    <div class="slide-info">
+                        <h2 class="slide-title">革新的なソリューション</h2>
+                        <p class="slide-description">最新技術を駆使した画期的なプロジェクト</p>
+                        <div class="slide-tags">
+                            <span class="tag">革新</span>
+                            <span class="tag">技術</span>
+                            <span class="tag">未来</span>
+                        </div>
                     </div>
                 </div>
-                <div class="feature-slide">
-                    <div class="feature-image">
-                        <div class="placeholder-img">IMAGE 2</div>
+
+                <div class="slide" data-title="プロジェクト Beta">
+                    <div class="slide-image">
+                        <div class="placeholder-image gradient-2">
+                            <div class="image-text">Project Beta</div>
+                            <div class="image-icon">✨</div>
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h3>アニメーション</h3>
-                        <p>美しいアニメーションとインタラクション</p>
+                    <div class="slide-info">
+                        <h2 class="slide-title">美しいデザイン</h2>
+                        <p class="slide-description">洗練されたUIとUXを追求したデザイン</p>
+                        <div class="slide-tags">
+                            <span class="tag">デザイン</span>
+                            <span class="tag">美しさ</span>
+                            <span class="tag">UX</span>
+                        </div>
                     </div>
                 </div>
-                <div class="feature-slide">
-                    <div class="feature-image">
-                        <div class="placeholder-img">IMAGE 3</div>
+
+                <div class="slide" data-title="プロジェクト Gamma">
+                    <div class="slide-image">
+                        <div class="placeholder-image gradient-3">
+                            <div class="image-text">Project Gamma</div>
+                            <div class="image-icon">⚡</div>
+                        </div>
                     </div>
-                    <div class="feature-content">
-                        <h3>高速パフォーマンス</h3>
-                        <p>最適化されたコードによる高速読み込み</p>
+                    <div class="slide-info">
+                        <h2 class="slide-title">高速パフォーマンス</h2>
+                        <p class="slide-description">最適化されたシステムによる高速処理</p>
+                        <div class="slide-tags">
+                            <span class="tag">高速</span>
+                            <span class="tag">最適化</span>
+                            <span class="tag">効率</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide" data-title="プロジェクト Delta">
+                    <div class="slide-image">
+                        <div class="placeholder-image gradient-4">
+                            <div class="image-text">Project Delta</div>
+                            <div class="image-icon">🌟</div>
+                        </div>
+                    </div>
+                    <div class="slide-info">
+                        <h2 class="slide-title">次世代体験</h2>
+                        <p class="slide-description">ユーザーに新しい価値を提供する体験</p>
+                        <div class="slide-tags">
+                            <span class="tag">体験</span>
+                            <span class="tag">価値</span>
+                            <span class="tag">革命</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide" data-title="プロジェクト Epsilon">
+                    <div class="slide-image">
+                        <div class="placeholder-image gradient-5">
+                            <div class="image-text">Project Epsilon</div>
+                            <div class="image-icon">🎯</div>
+                        </div>
+                    </div>
+                    <div class="slide-info">
+                        <h2 class="slide-title">精密な分析</h2>
+                        <p class="slide-description">データドリブンな意思決定をサポート</p>
+                        <div class="slide-tags">
+                            <span class="tag">分析</span>
+                            <span class="tag">データ</span>
+                            <span class="tag">精密</span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="slider-controls">
-                <button class="slider-btn prev" id="prev-btn">‹</button>
-                <div class="slider-dots" id="slider-dots"></div>
-                <button class="slider-btn next" id="next-btn">›</button>
-            </div>
-        </div>
-    </section>
 
-    <!-- ギャラリーセクション -->
-    <section class="gallery" id="gallery">
-        <div class="container">
-            <h2 class="section-title">Gallery</h2>
-            <div class="gallery-grid" id="gallery-grid">
-                <!-- JavaScript で動的生成 -->
+            <!-- プログレスバー -->
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill"></div>
+                </div>
+                <div class="progress-info">
+                    <span class="current-slide">1</span> / <span class="total-slides">5</span>
+                </div>
             </div>
-            <button class="load-more-btn" id="load-more">もっと見る</button>
-        </div>
-    </section>
+        </section>
 
-    <!-- コンタクトセクション -->
-    <section class="contact" id="contact">
-        <div class="container">
-            <h2 class="section-title">Contact</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <h3>お気軽にお問い合わせください</h3>
-                    <p>プロジェクトのご相談やお見積もりなど</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link">📱</a>
-                        <a href="#" class="social-link">📧</a>
-                        <a href="#" class="social-link">🐦</a>
-                        <a href="#" class="social-link">📷</a>
+        <!-- サイド情報パネル -->
+        <aside class="info-panel">
+            <div class="panel-content">
+                <div class="live-stats">
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="150">0</div>
+                        <div class="stat-label">参加者数</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="25">0</div>
+                        <div class="stat-label">展示ブース</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-count="48">0</div>
+                        <div class="stat-label">時間経過</div>
+                        <div class="stat-unit">時間</div>
                     </div>
                 </div>
-                <form class="contact-form" id="contact-form">
-                    <input type="text" placeholder="お名前" required>
-                    <input type="email" placeholder="メールアドレス" required>
-                    <textarea placeholder="メッセージ" rows="5" required></textarea>
-                    <button type="submit" class="submit-btn">送信する</button>
-                </form>
+                
+                <div class="event-info">
+                    <h3>イベント情報</h3>
+                    <div class="info-item">
+                        <span class="info-icon">📅</span>
+                        <span>2025年8月25日</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📍</span>
+                        <span>東京国際展示場</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">⏰</span>
+                        <span class="live-time">--:--:--</span>
+                    </div>
+                </div>
             </div>
-        </div>
-    </section>
+        </aside>
+    </main>
 
-    <!-- フッター -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-logo">LOGO</div>
-                <p>&copy; 2025 Your Website. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <!-- パーティクルエフェクト -->
+    <div class="particles" id="particles"></div>
 
-    <!-- Scripts -->
-    <script src="scripts/animations.js"></script>
-    <script src="scripts/main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
