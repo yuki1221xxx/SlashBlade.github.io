@@ -3,182 +3,189 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>イベント展示サイト</title>
+    <title>10周年記念特設サイト</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- メインタイトル（常時表示） -->
-    <header class="main-header">
-        <h1 class="main-title">
-            <span class="title-word">Event</span>
-            <span class="title-word">Showcase</span>
-            <span class="title-word">2025</span>
-        </h1>
-        <div class="subtitle">自動スライドショー展示中</div>
+    <!-- メイン記念ロゴ -->
+    <header class="anniversary-header">
+        <div class="logo-container">
+            <div class="main-logo">
+                <div class="anniversary-badge">
+                    <span class="anniversary-number">10</span>
+                    <span class="anniversary-text">周年</span>
+                </div>
+                <h1 class="site-title">
+                    <span class="title-main">記念特設サイト</span>
+                    <span class="title-sub">Anniversary Site</span>
+                </h1>
+            </div>
+            <div class="celebration-icons">
+                <div class="icon">🎉</div>
+                <div class="icon">✨</div>
+                <div class="icon">🎊</div>
+            </div>
+        </div>
     </header>
 
-    <!-- 背景アニメーション要素 -->
-    <div class="background-animation">
-        <div class="floating-shape circle"></div>
-        <div class="floating-shape triangle"></div>
-        <div class="floating-shape square"></div>
-        <div class="floating-shape hexagon"></div>
-        <div class="floating-shape circle"></div>
-        <div class="floating-shape triangle"></div>
-        <div class="wave-container">
-            <div class="wave"></div>
-            <div class="wave"></div>
-            <div class="wave"></div>
+    <!-- 記念メッセージセクション -->
+    <section class="message-section">
+        <div class="section-header">
+            <h2 class="section-title">記念メッセージ</h2>
+            <p class="section-subtitle">10年間の感謝を込めて</p>
         </div>
+        
+        <div class="message-slider">
+            <div class="message-container">
+                <div class="message-card active" data-message="1">
+                    <div class="message-image">
+                        <img src="images/sample1.png" alt="記念画像1" class="character-image">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <h3 class="message-title">創設者からのメッセージ</h3>
+                            <div class="message-date">2025.08.27</div>
+                        </div>
+                        <div class="message-text">
+                            <p>10周年を迎えることができたのは、皆様の温かいご支援があってこそです。これまで共に歩んできた道のりを振り返ると、感慨深いものがあります。</p>
+                            <p>これからも更なる発展を目指し、新しい挑戦を続けてまいります。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-card" data-message="2">
+                    <div class="message-image">
+                        <img src="images/sample2.png" alt="記念画像2" class="character-image">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <h3 class="message-title">開発チームより</h3>
+                            <div class="message-date">2025.08.27</div>
+                        </div>
+                        <div class="message-text">
+                            <p>技術の進歩と共に歩んできた10年間。ユーザーの皆様により良い体験を提供するため、日々技術革新に取り組んでまいりました。</p>
+                            <p>次の10年に向けて、さらなる可能性を追求してまいります。</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-card" data-message="3">
+                    <div class="message-image">
+                        <img src="images/sample3.png" alt="記念画像3" class="character-image">
+                    </div>
+                    <div class="message-content">
+                        <div class="message-header">
+                            <h3 class="message-title">コミュニティの皆様へ</h3>
+                            <div class="message-date">2025.08.27</div>
+                        </div>
+                        <div class="message-text">
+                            <p>素晴らしいコミュニティの皆様との出会いが、私たちの原動力です。共に創り上げてきた思い出は、かけがえのない宝物です。</p>
+                            <p>これからも皆様と一緒に、新しい物語を紡いでいきたいと思います。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- スライダーナビゲーション -->
+            <div class="slider-navigation">
+                <button class="nav-btn prev-btn" onclick="slideMessage(-1)">‹</button>
+                <div class="slide-indicators">
+                    <span class="indicator active" data-slide="0"></span>
+                    <span class="indicator" data-slide="1"></span>
+                    <span class="indicator" data-slide="2"></span>
+                </div>
+                <button class="nav-btn next-btn" onclick="slideMessage(1)">›</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- 記念統計セクション -->
+    <section class="stats-section">
+        <div class="section-header">
+            <h2 class="section-title">10年間の軌跡</h2>
+            <p class="section-subtitle">数字で振り返る成長の記録</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">👥</div>
+                <div class="stat-number" data-count="500000">0</div>
+                <div class="stat-label">総ユーザー数</div>
+                <div class="stat-description">10年間で築いたコミュニティ</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📚</div>
+                <div class="stat-number" data-count="1500">0</div>
+                <div class="stat-label">公開コンテンツ</div>
+                <div class="stat-description">豊富な作品ラインナップ</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🏆</div>
+                <div class="stat-number" data-count="25">0</div>
+                <div class="stat-label">受賞歴</div>
+                <div class="stat-description">業界からの評価</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🌟</div>
+                <div class="stat-number" data-count="3650">0</div>
+                <div class="stat-label">運営日数</div>
+                <div class="stat-description">継続的なサービス提供</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- タイムラインセクション -->
+    <section class="timeline-section">
+        <div class="section-header">
+            <h2 class="section-title">歴史と歩み</h2>
+            <p class="section-subtitle">10年間の主要な出来事</p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline-item">
+                <div class="timeline-year">2015</div>
+                <div class="timeline-content">
+                    <h3>サービス開始</h3>
+                    <p>小さな一歩から始まった大きな冒険</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2018</div>
+                <div class="timeline-content">
+                    <h3>大型アップデート</h3>
+                    <p>ユーザー体験の大幅な向上を実現</p>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-year">2021</div>
+                <div class="timeline-content">
+                    <h3>100万ユーザー達成</h3>
+                    <p>コミュニティの力で大きな節目を迎える</p>
+                </div>
+            </div>
+
+            <div class="timeline-item current">
+                <div class="timeline-year">2025</div>
+                <div class="timeline-content">
+                    <h3>10周年記念</h3>
+                    <p>感謝と共に新たなステージへ</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 背景装飾 -->
+    <div class="decorative-background">
+        <div class="floating-element circle"></div>
+        <div class="floating-element triangle"></div>
+        <div class="floating-element star"></div>
+        <div class="confetti-container" id="confetti"></div>
     </div>
-
-    <!-- メインコンテンツエリア -->
-    <main class="main-content">
-        <!-- 画像スライドショー -->
-        <section class="slideshow-container">
-            <div class="slide-wrapper">
-                <div class="slide active" data-title="プロジェクト Alpha">
-                    <div class="slide-image">
-                        <div class="placeholder-image gradient-1">
-                            <div class="image-text">Project Alpha</div>
-                            <div class="image-icon">🚀</div>
-                        </div>
-                    </div>
-                    <div class="slide-info">
-                        <h2 class="slide-title">革新的なソリューション</h2>
-                        <p class="slide-description">最新技術を駆使した画期的なプロジェクト</p>
-                        <div class="slide-tags">
-                            <span class="tag">革新</span>
-                            <span class="tag">技術</span>
-                            <span class="tag">未来</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide" data-title="プロジェクト Beta">
-                    <div class="slide-image">
-                        <div class="placeholder-image gradient-2">
-                            <div class="image-text">Project Beta</div>
-                            <div class="image-icon">✨</div>
-                        </div>
-                    </div>
-                    <div class="slide-info">
-                        <h2 class="slide-title">美しいデザイン</h2>
-                        <p class="slide-description">洗練されたUIとUXを追求したデザイン</p>
-                        <div class="slide-tags">
-                            <span class="tag">デザイン</span>
-                            <span class="tag">美しさ</span>
-                            <span class="tag">UX</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide" data-title="プロジェクト Gamma">
-                    <div class="slide-image">
-                        <div class="placeholder-image gradient-3">
-                            <div class="image-text">Project Gamma</div>
-                            <div class="image-icon">⚡</div>
-                        </div>
-                    </div>
-                    <div class="slide-info">
-                        <h2 class="slide-title">高速パフォーマンス</h2>
-                        <p class="slide-description">最適化されたシステムによる高速処理</p>
-                        <div class="slide-tags">
-                            <span class="tag">高速</span>
-                            <span class="tag">最適化</span>
-                            <span class="tag">効率</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide" data-title="プロジェクト Delta">
-                    <div class="slide-image">
-                        <div class="placeholder-image gradient-4">
-                            <div class="image-text">Project Delta</div>
-                            <div class="image-icon">🌟</div>
-                        </div>
-                    </div>
-                    <div class="slide-info">
-                        <h2 class="slide-title">次世代体験</h2>
-                        <p class="slide-description">ユーザーに新しい価値を提供する体験</p>
-                        <div class="slide-tags">
-                            <span class="tag">体験</span>
-                            <span class="tag">価値</span>
-                            <span class="tag">革命</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slide" data-title="プロジェクト Epsilon">
-                    <div class="slide-image">
-                        <div class="placeholder-image gradient-5">
-                            <div class="image-text">Project Epsilon</div>
-                            <div class="image-icon">🎯</div>
-                        </div>
-                    </div>
-                    <div class="slide-info">
-                        <h2 class="slide-title">精密な分析</h2>
-                        <p class="slide-description">データドリブンな意思決定をサポート</p>
-                        <div class="slide-tags">
-                            <span class="tag">分析</span>
-                            <span class="tag">データ</span>
-                            <span class="tag">精密</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- プログレスバー -->
-            <div class="progress-container">
-                <div class="progress-bar">
-                    <div class="progress-fill"></div>
-                </div>
-                <div class="progress-info">
-                    <span class="current-slide">1</span> / <span class="total-slides">5</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- サイド情報パネル -->
-        <aside class="info-panel">
-            <div class="panel-content">
-                <div class="live-stats">
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="150">0</div>
-                        <div class="stat-label">参加者数</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="25">0</div>
-                        <div class="stat-label">展示ブース</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number" data-count="48">0</div>
-                        <div class="stat-label">時間経過</div>
-                        <div class="stat-unit">時間</div>
-                    </div>
-                </div>
-                
-                <div class="event-info">
-                    <h3>イベント情報</h3>
-                    <div class="info-item">
-                        <span class="info-icon">📅</span>
-                        <span>2025年8月25日</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">📍</span>
-                        <span>東京国際展示場</span>
-                    </div>
-                    <div class="info-item">
-                        <span class="info-icon">⏰</span>
-                        <span class="live-time">--:--:--</span>
-                    </div>
-                </div>
-            </div>
-        </aside>
-    </main>
-
-    <!-- パーティクルエフェクト -->
-    <div class="particles" id="particles"></div>
 
     <script src="script.js"></script>
 </body>
