@@ -3,189 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>10周年記念特設サイト</title>
+    <title>東京ゲームショー展示サイト</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- メイン記念ロゴ -->
-    <header class="anniversary-header">
-        <div class="logo-container">
-            <div class="main-logo">
-                <div class="anniversary-badge">
-                    <span class="anniversary-number">10</span>
-                    <span class="anniversary-text">周年</span>
-                </div>
-                <h1 class="site-title">
-                    <span class="title-main">記念特設サイト</span>
-                    <span class="title-sub">Anniversary Site</span>
-                </h1>
-            </div>
-            <div class="celebration-icons">
-                <div class="icon">🎉</div>
-                <div class="icon">✨</div>
-                <div class="icon">🎊</div>
-            </div>
+    <!-- ヘッダーセクション -->
+    <header class="tgs-header">
+        <div class="header-container">
+            <h1 class="main-title">🎮 TGSへお越しいただき、ありがとうございます！</h1>
+            <h2 class="sub-title">[プロジェクト名/チーム名]</h2>
+            <p class="additional-message">遊んでいただけましたでしょうか？</p>
         </div>
     </header>
 
-    <!-- 記念メッセージセクション -->
-    <section class="message-section">
-        <div class="section-header">
-            <h2 class="section-title">記念メッセージ</h2>
-            <p class="section-subtitle">10年間の感謝を込めて</p>
-        </div>
-        
-        <div class="message-slider">
-            <div class="message-container">
-                <div class="message-card active" data-message="1">
-                    <div class="message-image">
-                        <img src="images/sample1.png" alt="記念画像1" class="character-image">
-                    </div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <h3 class="message-title">創設者からのメッセージ</h3>
-                            <div class="message-date">2025.08.27</div>
-                        </div>
-                        <div class="message-text">
-                            <p>10周年を迎えることができたのは、皆様の温かいご支援があってこそです。これまで共に歩んできた道のりを振り返ると、感慨深いものがあります。</p>
-                            <p>これからも更なる発展を目指し、新しい挑戦を続けてまいります。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message-card" data-message="2">
-                    <div class="message-image">
-                        <img src="images/sample2.png" alt="記念画像2" class="character-image">
-                    </div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <h3 class="message-title">開発チームより</h3>
-                            <div class="message-date">2025.08.27</div>
-                        </div>
-                        <div class="message-text">
-                            <p>技術の進歩と共に歩んできた10年間。ユーザーの皆様により良い体験を提供するため、日々技術革新に取り組んでまいりました。</p>
-                            <p>次の10年に向けて、さらなる可能性を追求してまいります。</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="message-card" data-message="3">
-                    <div class="message-image">
-                        <img src="images/sample3.png" alt="記念画像3" class="character-image">
-                    </div>
-                    <div class="message-content">
-                        <div class="message-header">
-                            <h3 class="message-title">コミュニティの皆様へ</h3>
-                            <div class="message-date">2025.08.27</div>
-                        </div>
-                        <div class="message-text">
-                            <p>素晴らしいコミュニティの皆様との出会いが、私たちの原動力です。共に創り上げてきた思い出は、かけがえのない宝物です。</p>
-                            <p>これからも皆様と一緒に、新しい物語を紡いでいきたいと思います。</p>
-                        </div>
-                    </div>
-                </div>
+    <!-- メインギャラリーセクション -->
+    <section class="gallery-section">
+        <div class="gallery-grid">
+            <!-- 1行目: メインゲーム画面とキャラクター/アートワーク -->
+            <div class="gallery-item" data-delay="0.2">
+                <img src="images/game1.jpg" alt="メインゲーム画面1" class="gallery-image">
             </div>
-
-            <!-- スライダーナビゲーション -->
-            <div class="slider-navigation">
-                <button class="nav-btn prev-btn" onclick="slideMessage(-1)">‹</button>
-                <div class="slide-indicators">
-                    <span class="indicator active" data-slide="0"></span>
-                    <span class="indicator" data-slide="1"></span>
-                    <span class="indicator" data-slide="2"></span>
-                </div>
-                <button class="nav-btn next-btn" onclick="slideMessage(1)">›</button>
+            <div class="gallery-item" data-delay="0.4">
+                <img src="images/game2.jpg" alt="メインゲーム画面2" class="gallery-image">
+            </div>
+            <div class="gallery-item" data-delay="0.6">
+                <img src="images/character1.jpg" alt="キャラクター1" class="gallery-image">
+            </div>
+            <div class="gallery-item" data-delay="0.8">
+                <img src="images/character2.jpg" alt="キャラクター2" class="gallery-image">
+            </div>
+            
+            <!-- 2行目: ゲームプレイシーンと開発風景/チーム写真 -->
+            <div class="gallery-item" data-delay="1.0">
+                <img src="images/gameplay1.jpg" alt="ゲームプレイシーン1" class="gallery-image">
+            </div>
+            <div class="gallery-item" data-delay="1.2">
+                <img src="images/gameplay2.jpg" alt="ゲームプレイシーン2" class="gallery-image">
+            </div>
+            <div class="gallery-item" data-delay="1.4">
+                <img src="images/team1.jpg" alt="開発風景" class="gallery-image">
+            </div>
+            <div class="gallery-item" data-delay="1.6">
+                <img src="images/team2.jpg" alt="チーム写真" class="gallery-image">
             </div>
         </div>
     </section>
 
-    <!-- 記念統計セクション -->
-    <section class="stats-section">
-        <div class="section-header">
-            <h2 class="section-title">10年間の軌跡</h2>
-            <p class="section-subtitle">数字で振り返る成長の記録</p>
-        </div>
-
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon">👥</div>
-                <div class="stat-number" data-count="500000">0</div>
-                <div class="stat-label">総ユーザー数</div>
-                <div class="stat-description">10年間で築いたコミュニティ</div>
+    <!-- QRコードセクション -->
+    <section class="qr-section">
+        <div class="qr-container">
+            <div class="qr-code">
+                <img src="images/qr-code.png" alt="アンケートQRコード">
             </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-number" data-count="1500">0</div>
-                <div class="stat-label">公開コンテンツ</div>
-                <div class="stat-description">豊富な作品ラインナップ</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">🏆</div>
-                <div class="stat-number" data-count="25">0</div>
-                <div class="stat-label">受賞歴</div>
-                <div class="stat-description">業界からの評価</div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-icon">🌟</div>
-                <div class="stat-number" data-count="3650">0</div>
-                <div class="stat-label">運営日数</div>
-                <div class="stat-description">継続的なサービス提供</div>
+            <div class="qr-text">
+                <p class="qr-main-text">アンケートにご協力ください</p>
+                <p class="qr-sub-text">ご感想をお聞かせください！</p>
             </div>
         </div>
     </section>
-
-    <!-- タイムラインセクション -->
-    <section class="timeline-section">
-        <div class="section-header">
-            <h2 class="section-title">歴史と歩み</h2>
-            <p class="section-subtitle">10年間の主要な出来事</p>
-        </div>
-
-        <div class="timeline-container">
-            <div class="timeline-item">
-                <div class="timeline-year">2015</div>
-                <div class="timeline-content">
-                    <h3>サービス開始</h3>
-                    <p>小さな一歩から始まった大きな冒険</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2018</div>
-                <div class="timeline-content">
-                    <h3>大型アップデート</h3>
-                    <p>ユーザー体験の大幅な向上を実現</p>
-                </div>
-            </div>
-
-            <div class="timeline-item">
-                <div class="timeline-year">2021</div>
-                <div class="timeline-content">
-                    <h3>100万ユーザー達成</h3>
-                    <p>コミュニティの力で大きな節目を迎える</p>
-                </div>
-            </div>
-
-            <div class="timeline-item current">
-                <div class="timeline-year">2025</div>
-                <div class="timeline-content">
-                    <h3>10周年記念</h3>
-                    <p>感謝と共に新たなステージへ</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 背景装飾 -->
-    <div class="decorative-background">
-        <div class="floating-element circle"></div>
-        <div class="floating-element triangle"></div>
-        <div class="floating-element star"></div>
-        <div class="confetti-container" id="confetti"></div>
-    </div>
 
     <script src="script.js"></script>
 </body>
