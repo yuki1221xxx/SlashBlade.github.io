@@ -54,6 +54,50 @@ class TGSShowcaseApp {
     }
 }
 
+// 中央浮遊レイアウト初期化
+class FloatingShowcase {
+  constructor() {
+    this.items = [...document.querySelectorAll('.floating-item')];
+    this.init();
+  }
+  init() {
+    this.unlockAnimations();
+    this.setupHoverOptimization();
+    this.powerSaveCheck();
+  }
+  unlockAnimations() {
+    // body.preload → 解除で全シーケンス開始
+    requestAnimationFrame(() => {
+      document.body.classList.remove('preload');
+    });
+  }
+  setupHoverOptimization() {
+    // モバイルでホバー不要: pointer coarse の場合シャドウ負荷軽減
+    if (window.matchMedia('(pointer: coarse)').matches) {
+      this.items.forEach(el => el.classList.add('no-hover'));
+    }
+  }
+  powerSaveCheck() {
+    if ('getBattery' in navigator) {
+      navigator.getBattery().then(b => {
+        if (b.level < 0.2) this.reduceMotion();
+      });
+    }
+  }
+  reduceMotion() {
+    document.documentElement.classList.add('reduce-motion');
+    const style = document.createElement('style');
+    style.textContent = `
+      .reduce-motion * {
+        animation-duration:.4s !important;
+        animation-iteration-count:1 !important;
+      }
+      .qr-card { animation:none !important; }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 // パフォーマンス最適化クラス
 class PerformanceOptimizer {
     constructor() {
@@ -108,7 +152,16 @@ class PerformanceOptimizer {
 document.addEventListener('DOMContentLoaded', () => {
     window.tgsApp = new TGSShowcaseApp();
     new PerformanceOptimizer();
+    new FloatingShowcase();
     
+    // 画像読み込み失敗フォールバック
+    document.querySelectorAll('img').forEach(img => {
+        img.addEventListener('error', () => {
+            img.style.opacity = '.35';
+            img.style.filter = 'grayscale(1) contrast(.6)';
+        }, { once:true });
+    });
+
     // 開発者モード
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
         console.log('🎮 TGS Showcase Site - Development Mode');

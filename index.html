@@ -1,67 +1,78 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>東京ゲームショー展示サイト</title>
-    <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TGS展示 - 中央浮遊レイアウト</title>
+<link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <!-- ヘッダーセクション -->
-    <header class="tgs-header">
-        <div class="header-container">
-            <h1 class="main-title">🎮 TGSへお越しいただき、ありがとうございます！</h1>
-            <h2 class="sub-title">[プロジェクト名/チーム名]</h2>
-            <p class="additional-message">遊んでいただけましたでしょうか？</p>
-        </div>
-    </header>
+<body class="preload">
+  <!-- HEADER ZONE -->
+  <header class="tgs-mini-header">
+    <div class="header-inner">
+      <h1 class="tgs-title">🎮 TGSご来場ありがとうございます！</h1>
+      <h2 class="tgs-subtitle">[プロジェクト名]</h2>
+    </div>
+  </header>
 
-    <!-- メインギャラリーセクション -->
-    <section class="gallery-section">
-        <div class="gallery-grid">
-            <!-- 1行目: メインゲーム画面とキャラクター/アートワーク -->
-            <div class="gallery-item" data-delay="0.2">
-                <img src="images/game1.jpg" alt="メインゲーム画面1" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="0.4">
-                <img src="images/game2.jpg" alt="メインゲーム画面2" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="0.6">
-                <img src="images/character1.jpg" alt="キャラクター1" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="0.8">
-                <img src="images/character2.jpg" alt="キャラクター2" class="gallery-image">
-            </div>
-            
-            <!-- 2行目: ゲームプレイシーンと開発風景/チーム写真 -->
-            <div class="gallery-item" data-delay="1.0">
-                <img src="images/gameplay1.jpg" alt="ゲームプレイシーン1" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="1.2">
-                <img src="images/gameplay2.jpg" alt="ゲームプレイシーン2" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="1.4">
-                <img src="images/team1.jpg" alt="開発風景" class="gallery-image">
-            </div>
-            <div class="gallery-item" data-delay="1.6">
-                <img src="images/team2.jpg" alt="チーム写真" class="gallery-image">
-            </div>
+  <!-- FLOATING CONTENT ZONE -->
+  <main class="floating-stage-wrapper">
+    <div class="floating-stage" aria-label="展示ビジュアル群">
+      <!-- 8枚：位置 + サイズ + 浮遊パターン -->
+      <div class="floating-item floating-item-l  pos-1  delay-1">
+        <div class="float-anim float-pattern-1">
+          <img src="images/f01.png" alt="メインビジュアル A" loading="lazy">
         </div>
-    </section>
-
-    <!-- QRコードセクション -->
-    <section class="qr-section">
-        <div class="qr-container">
-            <div class="qr-code">
-                <img src="images/qr-code.png" alt="アンケートQRコード">
-            </div>
-            <div class="qr-text">
-                <p class="qr-main-text">アンケートにご協力ください</p>
-                <p class="qr-sub-text">ご感想をお聞かせください！</p>
-            </div>
+      </div>
+      <div class="floating-item floating-item-m  pos-2  delay-2">
+        <div class="float-anim float-pattern-2">
+          <img src="images/f02.png" alt="ゲームスクリーン B" loading="lazy">
         </div>
-    </section>
+      </div>
+      <div class="floating-item floating-item-s  pos-3  delay-3">
+        <div class="float-anim float-pattern-3">
+          <img src="images/f03.png" alt="アイコン C" loading="lazy">
+        </div>
+      </div>
+      <div class="floating-item floating-item-l  pos-4  delay-4">
+        <div class="float-anim float-pattern-2">
+          <img src="images/f04.png" alt="キャラクター D" loading="lazy">
+        </div>
+      </div>
+      <div class="floating-item floating-item-xl pos-5  delay-5 main-focus">
+        <div class="float-anim float-pattern-1">
+          <img src="images/f05.png" alt="メインキービジュアル E" loading="lazy">
+        </div>
+      </div>
+      <div class="floating-item floating-item-m  pos-6  delay-6">
+        <div class="float-anim float-pattern-3">
+          <img src="images/f06.png" alt="ゲームプレイ F" loading="lazy">
+        </div>
+      </div>
+      <div class="floating-item floating-item-s  pos-7  delay-7">
+        <div class="float-anim float-pattern-2">
+          <img src="images/f07.png" alt="制作風景 G" loading="lazy">
+        </div>
+      </div>
+      <div class="floating-item floating-item-m  pos-8  delay-8">
+        <div class="float-anim float-pattern-1">
+            <img src="images/f08.png" alt="チーム写真 H" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </main>
 
-    <script src="script.js"></script>
+  <!-- QR & FOOTER ZONE -->
+  <aside class="qr-fixed" aria-label="アンケートQR">
+    <div class="qr-card">
+      <div class="qr-img">
+        <img src="images/qr.png" alt="アンケートQRコード" loading="lazy">
+      </div>
+      <p class="qr-main">アンケートにご協力ください</p>
+      <p class="qr-sub">ご感想をお聞かせください！</p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
 </body>
 </html>
