@@ -64,6 +64,7 @@ class FloatingShowcase {
     this.unlockAnimations();
     this.setupHoverOptimization();
     this.powerSaveCheck();
+    this.randomizeFloatAnimations(); // 追加：浮遊バラバラ化
   }
   unlockAnimations() {
     // body.preload → 解除で全シーケンス開始
@@ -95,6 +96,25 @@ class FloatingShowcase {
       .qr-card { animation:none !important; }
     `;
     document.head.appendChild(style);
+  }
+  /* 追加: 浮遊アニメをバラバラにランダム化 */
+  randomizeFloatAnimations() {
+    this.items.forEach(item => {
+      const animEl = item.querySelector('.float-anim');
+      if (!animEl) return;
+      // 既存パターンを維持しつつ時間・遅延をランダム設定
+      const baseDur = animEl.classList.contains('float-pattern-2') ? 12 :
+                      animEl.classList.contains('float-pattern-3') ? 10 : 8;
+      const duration = (baseDur * (0.75 + Math.random() * 0.9)).toFixed(2); // 0.75〜1.65倍
+      const negPhase = (-Math.random() * duration).toFixed(2); // 中途位相開始
+      animEl.style.animationDuration = duration + 's';
+      animEl.style.animationDelay = negPhase + 's';
+      animEl.classList.add('float-randomized');
+
+      // 微小なスケール差で奥行き感（transform競合回避：内側要素へ）
+      const scale = (0.94 + Math.random() * 0.18).toFixed(3);
+      animEl.style.transform = `scale(${scale})`;
+    });
   }
 }
 
