@@ -1,78 +1,94 @@
-<!DOCTYPE html>
-<html lang="ja">
+<!DOCTYPE html> <!-- HTML5 ドキュメント宣言 -->
+<html lang="ja"> <!-- ページ既定言語：日本語 -->
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>TGS展示 - 中央浮遊レイアウト</title>
+<meta charset="UTF-8"> <!-- 文字コード -->
+<meta name="viewport" content="width=device-width,initial-scale=1.0"> <!-- レスポンシブ用 -->
+<title>音の刃特設サイト</title>
+
+<!-- 外部スタイルシート -->
 <link rel="stylesheet" href="style.css">
+
+<!-- Favicon （ブラウザのタブ / ショートカット用アイコン）
+     images/favicon.png (推奨 32x32 or 48x48) を配置してください。
+     必要に応じて下記のコメントアウト例を用いて複数サイズを追加可。 -->
+<link rel="icon" type="image/png" href="images/logo.png">
+<!-- 例:
+<link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+-->
+
+<style>
+/* ヘッダー: タイトル画像が上で見切れないよう余白とサイズ調整 */
+.tgs-mini-header {
+  padding-top: 3.5rem; /* 上余白。必要なら数値調整 */
+}
+.tgs-title { margin: 0; }
+.tgs-title-img {
+  display: block;
+  width: 100%;
+  max-width: 600px; /* タイトル画像最大幅 */
+  height: auto;
+  margin: 0 auto;
+}
+@media (min-width: 900px) {
+  .tgs-mini-header { padding-top: 4.5rem; } /* 大きな画面で余白拡張 */
+}
+</style>
 </head>
-<body class="preload">
-  <!-- HEADER ZONE -->
+<body> <!-- preload 削除 -->
+
+  <!-- HEADER ZONE: ページ上部タイトル領域 -->
   <header class="tgs-mini-header">
     <div class="header-inner">
-      <h1 class="tgs-title">🎮 あいうえお</h1>
-      <h2 class="tgs-subtitle">[プロジェクト名]</h2>
+      <h1 class="tgs-title">
+        <img src="images/Title.png" alt="あいうえお" class="tgs-title-img"> <!-- 画像タイトル -->
+      </h1>
     </div>
   </header>
 
-  <!-- FLOATING CONTENT ZONE -->
+  <!-- FLOATING CONTENT ZONE: 画像群を浮遊アニメで配置するメイン演出領域 -->
   <main class="floating-stage-wrapper">
     <div class="floating-stage" aria-label="展示ビジュアル群">
-      <!-- 8枚：位置 + サイズ + 浮遊パターン -->
-      <div class="floating-item floating-item-l  pos-1  delay-1">
-        <div class="float-anim float-pattern-1">
-          <img src="images/f01.png" alt="メインビジュアル A" loading="lazy">
-        </div>
+      <!-- 各アイテム: 内部の float-anim / pattern / data-* 削除 -->
+      <div class="floating-item floating-item-l pos-1">
+        <img src="images/sample1.png" alt="メインビジュアル A" loading="lazy" data-w="200">
       </div>
-      <div class="floating-item floating-item-m  pos-2  delay-2">
-        <div class="float-anim float-pattern-2">
-          <img src="images/f02.png" alt="ゲームスクリーン B" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-m pos-2">
+        <img src="images/sample2.png" alt="ゲームスクリーン B" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-s  pos-3  delay-3">
-        <div class="float-anim float-pattern-3">
-          <img src="images/f03.png" alt="アイコン C" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-s pos-3">
+        <img src="images/sample3.png" alt="アイコン C" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-l  pos-4  delay-4">
-        <div class="float-anim float-pattern-2">
-          <img src="images/f04.png" alt="キャラクター D" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-l pos-4">
+        <img src="images/sample4.png" alt="キャラクター D" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-xl pos-5  delay-5 main-focus">
-        <div class="float-anim float-pattern-1">
-          <img src="images/f05.png" alt="メインキービジュアル E" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-xl pos-5 main-focus">
+        <img src="images/sample5.png" alt="メインキービジュアル E" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-m  pos-6  delay-6">
-        <div class="float-anim float-pattern-3">
-          <img src="images/f06.png" alt="ゲームプレイ F" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-m pos-6">
+        <img src="images/sample6.png" alt="ゲームプレイ F" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-s  pos-7  delay-7">
-        <div class="float-anim float-pattern-2">
-          <img src="images/f07.png" alt="制作風景 G" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-s pos-7">
+        <img src="images/sample7.png" alt="制作風景 G" loading="lazy" data-w="150">
       </div>
-      <div class="floating-item floating-item-m  pos-8  delay-8">
-        <div class="float-anim float-pattern-1">
-            <img src="images/f08.png" alt="チーム写真 H" loading="lazy">
-        </div>
+      <div class="floating-item floating-item-m pos-8">
+        <img src="images/sample8.png" alt="チーム写真 H" loading="lazy" data-w="150">
       </div>
     </div>
   </main>
 
-  <!-- QR & FOOTER ZONE -->
+  <!-- QR & FOOTER ZONE: 固定表示のアンケート誘導カード -->
   <aside class="qr-fixed" aria-label="アンケートQR">
     <div class="qr-card">
       <div class="qr-img">
-        <img src="images/qr.png" alt="アンケートQRコード" loading="lazy">
+        <img src="images/qrcode.png" alt="アンケートQRコード" loading="lazy">
       </div>
-      <p class="qr-main">アンケートにご協力ください</p>
-      <p class="qr-sub">ご感想をお聞かせください！</p>
+      <p class="qr-main">アンケートにご協力ください!</p>
     </div>
   </aside>
 
+  <!-- 最小スクリプト（フォールバックのみ） -->
   <script src="script.js"></script>
 </body>
 </html>

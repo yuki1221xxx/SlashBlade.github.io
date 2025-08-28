@@ -2,10 +2,10 @@
    基本トークン
 ======================================== */
 :root {
-  --primary-red:#FF6B6B;
+  --primary-red:#ff6b6b;
   --sky-blue:#4ECDC4;
   --warm-yellow:#FFE66D;
-  --vibrant-orange:#FF8E53;
+  --vibrant-orange:#ff5353;
   --coral-pink:#FF9999;
   --warm-white:#FFFEF7;
   --shadow-soft:0 10px 25px rgba(0,0,0,0.15);
@@ -23,15 +23,13 @@ body {
   color:#333;
   min-height:100vh;
   overflow:hidden;
-  /* 背景をオレンジ基調へ変更 */
   background:
     radial-gradient(circle at 35% 25%, rgba(255,190,140,.45) 0%, transparent 55%),
     radial-gradient(circle at 75% 70%, rgba(255,120,60,.35) 0%, transparent 60%),
     linear-gradient(135deg,#FFB070 0%, #FF8E53 45%, #FF6B2D 100%);
-  animation:bgShift 28s ease-in-out infinite alternate;
   perspective:1600px;
 }
-body.preload * { animation-play-state:paused !important; }
+body.preload * {}
 
 /* スクロールが無い前提でメイン中央表示 */
 .floating-stage-wrapper {
@@ -66,114 +64,43 @@ body.preload * { animation-play-state:paused !important; }
   font-weight:700;
   letter-spacing:.5px;
   color:var(--primary-red);
-  opacity:0;
-  animation:fadeDown .8s var(--ease-smooth) .3s forwards;
+  opacity:1;
 }
 .tgs-subtitle {
   font-size:1.3rem;
   font-weight:600;
   color:var(--sky-blue);
-  opacity:0;
-  animation:fadeDown .6s var(--ease-smooth) .6s forwards;
+  opacity:1;
 }
 
 /* ========================================
    浮遊ステージ
 ======================================== */
 .floating-stage {
-  position:relative;
-  width:100%;
-  height:600px;
-  max-width:1200px;
-  pointer-events:none;
+  position: relative;
+  width:100vw;
+  height:calc(100vh - 80px);
+  max-width:none;
+  /* 重なり予防: 余白不要なのでそのまま */
 }
 
+/* 既存のmaterialAppearアニメーションを無効化 */
 .floating-item {
-  position:absolute;
-  top:50%; left:50%;
-  transform-origin:center;
-  opacity:0;
-  transform:scale(.3) translateY(50px);
-  animation:materialAppear 1.2s var(--ease-out) forwards;
-  filter:drop-shadow(0 10px 25px rgba(0,0,0,.15));
-  transition:filter .3s var(--ease-smooth), transform .3s var(--ease-smooth);
-}
-
-.floating-item img {
-  width:100%; height:100%; object-fit:contain; display:block;
-  user-select:none; pointer-events:auto;
-}
-
-/* サイズバリエーション */
-.floating-item-xl { width:320px; height:240px; z-index:15; }
-.floating-item-l  { width:280px; height:210px; z-index:12; }
-.floating-item-m  { width:240px; height:180px; z-index:10; }
-.floating-item-s  { width:200px; height:150px; z-index:8;  }
-
-/* 座標（中心 0,0 基準） */
-.pos-1 { transform:translate(-280px,-180px); }
-.pos-2 { transform:translate(200px,-220px); }
-.pos-3 { transform:translate(-350px,-50px); }
-.pos-4 { transform:translate(250px,-80px); }
-.pos-5 { transform:translate(0px,0px); }
-.pos-6 { transform:translate(-200px,120px); }
-.pos-7 { transform:translate(300px,100px); }
-.pos-8 { transform:translate(50px,180px); }
-
-/* appear 後に再度基準調整：materialAppear が transform を使用するため
-   初期配置 → appear完了後 JS で base-pos クラスに差し替える方式でも可
-   簡易には: animation 内で最終 transform: scale(1) translate(0) を適用しない代替として
-   wrapper(=floating-item) は座標のみ、拡大縮小は animation 内で scale のみ扱う */
-@keyframes materialAppear {
-  0% { opacity:0; transform:scale(.3) translateY(50px); }
-  70% { opacity:1; transform:scale(1.05) translateY(-5px); }
-  100% { opacity:1; transform:scale(1) translateY(0); }
-}
-
-/* 遅延割当 */
-.delay-1 { animation-delay:.5s; }
-.delay-2 { animation-delay:.8s; }
-.delay-3 { animation-delay:1.1s; }
-.delay-4 { animation-delay:1.4s; }
-.delay-5 { animation-delay:1.7s; }
-.delay-6 { animation-delay:2.0s; }
-.delay-7 { animation-delay:2.3s; }
-.delay-8 { animation-delay:2.6s; }
-
-/* 浮遊アニメは内側要素に適用し transform 競合回避 */
-.float-anim {
-  width:100%; height:100%;
-  animation-play-state:running;
-  will-change:transform;
-  animation-timing-function:cubic-bezier(.45,.05,.55,.95);
-}
-.float-pattern-1 { animation:floatDrift1 8s ease-in-out infinite; }
-.float-pattern-2 { animation:floatDrift2 12s ease-in-out infinite; }
-.float-pattern-3 { animation:floatDrift3 10s ease-in-out infinite; }
-
-/* 個別漂流 */
-@keyframes floatDrift1 {
-  0%,100% { transform:translate(0,0) rotate(0deg); }
-  25% { transform:translate(8px,-15px) rotate(2deg); }
-  50% { transform:translate(-5px,-8px) rotate(-1deg); }
-  75% { transform:translate(12px,-20px) rotate(3deg); }
-}
-@keyframes floatDrift2 {
-  0%,100% { transform:translate(0,0) rotate(0deg); }
-  33% { transform:translate(-8px,-12px) rotate(-2deg); }
-  66% { transform:translate(10px,-18px) rotate(1.5deg); }
-}
-@keyframes floatDrift3 {
-  0%,100% { transform:translate(0,0) rotate(0deg); }
-  20% { transform:translate(6px,-10px) rotate(1deg); }
-  40% { transform:translate(-4px,-5px) rotate(-.5deg); }
-  60% { transform:translate(9px,-15px) rotate(2deg); }
-  80% { transform:translate(-7px,-8px) rotate(-1.5deg); }
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform-origin: center;
+  transform: translate(-50%, -50%); /* 出現/縮尺アニメ削除で単純化 */
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,.15));
+  opacity: 1;
 }
 
 /* ホバー（内側停止 + 立体感） */
-.floating-item:hover { filter:drop-shadow(0 20px 40px rgba(0,0,0,.25)); transform:scale(1.1); }
-.floating-item:hover .float-anim { animation-play-state:paused; }
+.floating-item:hover { 
+  /* 削除: 拡大/影強調等の動的効果 */
+  transform: translate(-50%, -50%);
+  filter: drop-shadow(0 10px 25px rgba(0,0,0,.15));
+}
 
 /* 小サイズ背景ぼかしアクセント */
 .floating-item-s::before {
@@ -194,7 +121,7 @@ body.preload * { animation-play-state:paused !important; }
 }
 .qr-card {
   width:160px; height:180px;
-  background:rgba(255,255,255,.75);
+  background:#fff;
   border-radius:16px;
   padding:14px 12px 10px;
   display:flex;
@@ -203,15 +130,9 @@ body.preload * { animation-play-state:paused !important; }
   justify-content:flex-start;
   gap:4px;
   box-shadow:var(--shadow-soft);
-  animation:qrPulse 2.4s ease-in-out 3s infinite;
-  transition:background .3s var(--ease-smooth), transform .3s var(--ease-smooth);
-  backdrop-filter:blur(6px);
 }
 .qr-card:hover {
-  background:rgba(255,255,255,.92);
-  animation-duration:.9s;
-  transform:translateY(-4px);
-  box-shadow:var(--shadow-strong);
+  background:#fff;
 }
 .qr-img { width:100px; height:100px; }
 .qr-img img { width:100%; height:100%; object-fit:contain; }
@@ -224,33 +145,42 @@ body.preload * { animation-play-state:paused !important; }
   color:var(--vibrant-orange);
 }
 
-@keyframes qrPulse {
-  0%,100% { transform:scale(1); }
-  50% { transform:scale(1.05); }
-}
-
 /* ========================================
-   補助アニメ
+   画像サイズ調整用
+   - ここで幅を変えると各サイズクラス共通で反映
+   - height:auto とすると比率維持
+   - 個別に変えたい場合: .pos-3 img { width:220px; }
 ======================================== */
-@keyframes fadeDown {
-  0% { opacity:0; transform:translateY(-30px); }
-  100% { opacity:1; transform:translateY(0); }
+.floating-item-xl img { width:480px; height:auto; }
+.floating-item-l  img { width:380px; height:auto; }
+.floating-item-m  img { width:260px; height:auto; }
+.floating-item-s  img { width:180px; height:auto; }
+
+/* スマホ等で更に小さくしたい場合は既存メディアクエリ内で再指定 */
+@media (max-width:1024px) {
+  /* 既存指定 (.floating-item-xl / -l) を img 幅に合わせて調整したいなら下記を利用
+     必要なければ削除可 */
+  .floating-item-xl img { width:280px; }
+  .floating-item-l  img { width:240px; }
+  .floating-item-m  img { width:200px; }
+  .floating-item-s  img { width:150px; }
 }
 
-@keyframes bgShift {
-  0% { background-position:0% 50%; }
-  50% { background-position:100% 48%; }
-  100% { background-position:0% 52%; }
+/* さらに狭い幅用の追加例
+@media (max-width:520px) {
+  .floating-item-xl img { width:240px; }
+  .floating-item-l  img { width:200px; }
+  .floating-item-m  img { width:160px; }
+  .floating-item-s  img { width:130px; }
 }
+*/
 
 /* ========================================
    レスポンシブ
 ======================================== */
-@media (max-width:1200px) {
-  .floating-stage { transform:scale(.9); }
-}
+@media (max-width:1200px) { .floating-stage { transform:none !important; } }
 @media (max-width:1024px) {
-  .floating-stage { transform:scale(.8); }
+  .floating-stage { transform:none !important; }
   .floating-item-xl { width:280px; height:210px; }
   .floating-item-l  { width:240px; height:180px; }
 }
@@ -261,25 +191,70 @@ body.preload * { animation-play-state:paused !important; }
     min-height:calc(100vh - 80px);
     padding:60px 0 160px;
   }
-  .floating-stage {
-    height:640px;
-    transform:scale(.75);
-  }
+  .floating-stage { height:640px; transform:none !important; }
 }
 @media (max-width:768px) {
   .tgs-mini-header { height:72px; }
   .tgs-title { font-size:1.55rem; }
   .tgs-subtitle { font-size:1.05rem; }
-  .floating-stage { transform:scale(.62); height:560px; }
+  .floating-stage { transform:none !important; height:560px; }
   .qr-card { width:130px; height:155px; }
   .qr-img { width:86px; height:86px; }
   .qr-main { font-size:.85rem; }
   .qr-sub { font-size:.65rem; }
 }
 @media (max-width:520px) {
-  .floating-stage { transform:scale(.52); }
   .qr-fixed { right:14px; bottom:14px; }
 }
-@media (prefers-reduced-motion:reduce) {
-  * { animation-duration:.01ms !important; animation-iteration-count:1 !important; transition:none !important; }
+
+/* === Spread Layout Overrides (全面散開 & 中央基準) === */
+
+/* 中央基準化: top/left を要素中央に */
+.floating-item {
+  /* 既存 transform を置き換え (scale/appear 用) */
+  transform:translate(-50%,-50%);
+  opacity:1;
 }
+
+/* 画面幅 >=900px の散開座標（中央基準のため値は中心） */
+@media (min-width:900px) {
+  .pos-1 { top:12%; left:14%; }
+  .pos-2 { top:18%; left:78%; }
+  .pos-3 { top:76%; left:18%; }
+  .pos-4 { top:82%; left:70%; }
+  .pos-5 { top:46%; left:50%; } /* メイン */
+  .pos-6 { top:60%; left:66%; }
+  .pos-7 { top:26%; left:90%; }
+  .pos-8 { top:68%; left:44%; }
+}
+
+/* 画面幅 <900px：縦方向に拡張し密度緩和 */
+@media (max-width:899px) {
+  .floating-stage { height:140vh; }
+  .pos-1 { top:10%; left:20%; }
+  .pos-2 { top:22%; left:74%; }
+  .pos-3 { top:92%; left:28%; }
+  .pos-4 { top:106%; left:78%; }
+  .pos-5 { top:48%; left:48%; }
+  .pos-6 { top:66%; left:70%; }
+  .pos-7 { top:30%; left:90%; }
+  .pos-8 { top:82%; left:40%; }
+}
+
+/* 既存の .floating-stage 縮小 (transform:scale) を無効化して重なり減 */
+@media (max-width:1200px),
+       (max-width:1024px),
+       (max-width:900px),
+       (max-width:768px),
+       (max-width:520px) {
+  .floating-stage { transform:none !important; }
+}
+
+/* 余白調整: ビューポート端の切れ防止で少し内側に収めたい場合は下記例を解除
+.floating-stage { padding:1.5vh 1.5vw; }
+*/
+
+/* 個別サイズ data-w / data-h 用の補助
+   JS が幅/高さを当てるが高さ未指定時の比率維持を明示 */
+.floating-stage img[data-w] { height:auto; }
+.floating-stage img[data-h] { width:auto; }
