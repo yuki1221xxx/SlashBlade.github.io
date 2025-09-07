@@ -876,6 +876,101 @@
                     font-size: 1rem;
                 }
             }
+
+            /* ノーツボタンのスタイル */
+            .note-btn-container {
+                position: relative;
+                display: inline-block;
+                width: 100px;
+                height: 100px;
+                cursor: pointer;
+                margin-top: 20px;
+                transition: transform 0.3s ease;
+            }
+            
+            .note-btn-container:hover {
+                transform: scale(1.1);
+            }
+            
+            .note-btn {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                /* border-radius: 50%; を削除 - ノーツの形が正しく表示されるようにする */
+                box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+                transition: all 0.3s ease;
+            }
+            
+            .note-btn-container:hover::after {
+                opacity: 1;
+            }
+            
+            /* 各ノーツのアニメーション */
+            @keyframes explode {
+                0% { transform: scale(1); opacity: 1; }
+                20% { transform: scale(1.2); opacity: 0.9; }
+                50% { transform: scale(1.5); opacity: 0.6; }
+                100% { transform: scale(2); opacity: 0; }
+            }
+            
+            @keyframes slideDown {
+                0% { transform: translateY(0); opacity: 1; }
+                100% { transform: translateY(500px); opacity: 0; }
+            }
+            
+            @keyframes slideRight {
+                0% { transform: translateX(0); opacity: 1; }
+                100% { transform: translateX(500px); opacity: 0; }
+            }
+            
+            @keyframes slideLeft {
+                0% { transform: translateX(0); opacity: 1; }
+                100% { transform: translateX(-500px); opacity: 0; }
+            }
+            
+            .exploding {
+                animation: explode 0.5s forwards;
+            }
+            
+            .sliding-down {
+                animation: slideDown 1s forwards;
+            }
+            
+            .sliding-right {
+                animation: slideRight 1s forwards;
+            }
+            
+            .sliding-left {
+                animation: slideLeft 1s forwards;
+            }
+            
+            /* 星エフェクト */
+            .star {
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                background-color: rgba(255, 255, 255, 0.8);
+                border-radius: 50%;
+                pointer-events: none;
+                z-index: 10;
+                box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #ff0, 0 0 20px #ff0;
+            }
+            
+            @keyframes sparkle {
+                0% { transform: scale(0) rotate(0deg); opacity: 0; }
+                50% { opacity: 1; }
+                100% { transform: scale(1.5) rotate(90deg); opacity: 0; }
+            }
+            
+            /* ノーツのリセットアニメーション */
+            @keyframes resetNote {
+                0% { opacity: 0; transform: scale(0.5); }
+                100% { opacity: 1; transform: scale(1); }
+            }
+            
+            .resetting {
+                animation: resetNote 0.5s forwards;
+            }
         </style>
     </head>
     <body id="page-top">
@@ -918,7 +1013,11 @@
                         <div class="title-text">音の刃</div>
                         
                         <h2 class="text-white-50 mx-auto mt-5 mb-5">おいでませ</h2>
-                        <a class="btn btn-primary" href="#play">遊んでみる</a>
+                        
+                        <!-- 遊んでみるボタンをノーツ画像に置き換え -->
+                        <div class="note-btn-container" id="play-note-btn">
+                            <img src="assets/img/healnote.png" alt="Play Note" class="note-btn" id="note-btn-img">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1279,5 +1378,125 @@
                 }
             })();
         </script>
+        
+        <script>
+            /* === ノーツボタンの機能 === */
+            document.addEventListener('DOMContentLoaded', function() {
+                const noteBtn = document.getElementById('play-note-btn');
+                const noteImg = document.getElementById('note-btn-img');
+                const noteTypes = ['bomnote.png', 'downnote.png', 'healnote.png', 'leftnote.png', 'rightnote.png'];
+                let currentNoteType = '';
+                
+                // ランダムなノーツタイプを選択
+                function selectRandomNote() {
+                    const randomIndex = Math.floor(Math.random() * noteTypes.length);
+                    currentNoteType = noteTypes[randomIndex];
+                    noteImg.src = `assets/img/${currentNoteType}`;
+                    noteImg.classList.add('resetting');
+                    
+                    // リセットアニメーション終了後にクラスを削除
+                    setTimeout(() => {
+                        noteImg.classList.remove('resetting');
+                    }, 500);
+                }
+                
+                // 初期ノーツをランダムに設定
+                selectRandomNote();
+                
+                // クリック時のアニメーション
+                noteBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // ノーツタイプに応じたアニメーションを適用
+                    switch(currentNoteType) {
+                        case 'bomnote.png':
+                            // 爆発アニメーション
+                            noteImg.classList.add('exploding');
+                            
+                            // 爆発音を再生（オプション）
+                            const explosionSound = new Audio('assets/audio/explosion.mp3');
+                            explosionSound.volume = 0.3;
+                            explosionSound.play().catch(e => console.log('Audio play failed:', e));
+                            
+                            break;
+                            
+                        case 'downnote.png':
+                            //  下にスライド
+                            noteImg.classList.add('sliding-down');
+                            break;
+                            
+                        case 'rightnote.png':
+                            // 右にスライド
+                            noteImg.classList.add('sliding-right');
+                            break;
+                            
+                        case 'leftnote.png':
+                            // 左にスライド
+                            noteImg.classList.add('sliding-left');
+                            break;
+                            
+                        case 'healnote.png':
+                            // きらきら星エフェクト
+                            createStars(noteBtn);
+                            break;
+                    }
+                    
+                    // アニメーション完了後に新しいノーツを表示
+                    setTimeout(() => {
+                        // アニメーションクラスをすべて削除
+                        noteImg.classList.remove('exploding', 'sliding-down', 'sliding-right', 'sliding-left');
+                        
+                        // 新しいノーツを選択
+                        selectRandomNote();
+                    }, 700);
+                });
+                
+                // きらきら星エフェクトを作成
+                function createStars(container) {
+                    const containerRect = container.getBoundingClientRect();
+                    const centerX = containerRect.width / 2;
+                    const centerY = containerRect.height / 2;
+                    
+                    // 20個の星を作成
+                    for (let i = 0; i < 20; i++) {
+                        const star = document.createElement('div');
+                        star.classList.add('star');
+                        
+                        // 星のサイズをランダムに
+                        const size = Math.random() * 8 + 4;
+                        star.style.width = `${size}px`;
+                        star.style.height = `${size}px`;
+                        
+                        // 星の色をランダムに
+                        const colors = ['#fff', '#fffacd', '#ffec8b', '#ffff00', '#ffd700'];
+                        const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                        star.style.backgroundColor = randomColor;
+                        
+                        // 星の位置を中心からランダムな角度と距離に配置
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = Math.random() * 50;
+                        const x = centerX + Math.cos(angle) * distance;
+                        const y = centerY + Math.sin(angle) * distance;
+                        
+                        star.style.left = `${x}px`;
+                        star.style.top = `${y}px`;
+                        
+                        // アニメーション速度をランダムに
+                        const duration = Math.random() * 0.5 + 0.5;
+                        star.style.animation = `sparkle ${duration}s forwards`;
+                        
+                        // コンテナに星を追加
+                        container.appendChild(star);
+                        
+                        // アニメーション終了後に星を削除
+                        setTimeout(() => {
+                            container.removeChild(star);
+                        }, duration * 1000);
+                    }
+                }
+            });
+        </script>
+        
+        <!-- ...existing code... -->
     </body>
 </html>
