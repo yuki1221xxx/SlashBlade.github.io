@@ -188,7 +188,7 @@
                 transform: none;
             }
 
-            /* カーテンアニメーション */
+            /* カーテンアニメーション - サイバーパンク風 */
             .curtain-animation {
                 position: relative;
                 overflow: hidden;
@@ -201,11 +201,12 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
-                background-color: #ff9ea6;
+                background: linear-gradient(135deg, #1a0033 0%, #000a1a 50%, #0a0a0a 100%);
                 transform: translate(0, 100%);
-                transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) .2s; /* 0.8秒から0.4秒に短縮 */
+                transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) .2s;
                 content: '';
                 z-index: 1;
+                box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
             }
             
             .curtain-animation.is-visible:before {
@@ -332,9 +333,21 @@
                 list-style: none;
                 width: 20px;
                 height: 20px;
-                background: rgba(255, 85, 82, 0.6); /* #FF5552 with 0.6 opacity */
+                background: rgba(0, 255, 255, 0.4);
+                box-shadow: 0 0 10px rgba(0, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.4);
                 animation: animate 35s linear infinite;
                 bottom: -150px;
+                border-radius: 50%;
+            }
+            
+            .circles li:nth-child(odd) {
+                background: rgba(255, 0, 255, 0.4);
+                box-shadow: 0 0 10px rgba(255, 0, 255, 0.6), 0 0 20px rgba(255, 0, 255, 0.4);
+            }
+            
+            .circles li:nth-child(3n) {
+                background: rgba(0, 255, 127, 0.4);
+                box-shadow: 0 0 10px rgba(0, 255, 127, 0.6), 0 0 20px rgba(0, 255, 127, 0.4);
             }
 
             .circles li:nth-child(1) {
@@ -514,19 +527,54 @@
                 z-index: 2;
             }
 
-            /* 背景色統一 */
+            /* サイバーパンク風背景色統一 */
             .play-section {
-                background-color: #FF8CA9;
+                background: linear-gradient(135deg, #0a0a0a 0%, #1a0033 50%, #000a1a 100%);
+                position: relative;
+                overflow: hidden;
+            }
+            .play-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    radial-gradient(circle at 20% 50%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 50%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+                pointer-events: none;
             }
             .projects-section {
-                background-color: #FF8CA9 !important;
+                background: linear-gradient(135deg, #0f0f23 0%, #1a0033 50%, #0a1a1a 100%) !important;
             }
             .animated-area {
-                background: #FF8CA9 !important;
-                background: linear-gradient(to left, #FF8CA9, #FF8CA9) !important;
+                background: linear-gradient(135deg, #0f0f23 0%, #1a0033 50%, #0a1a1a 100%) !important;
             }
             .contact-section {
-                background-color: #FF8CA9 !important;
+                background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #000a1a 100%) !important;
+                position: relative;
+                padding-bottom: 3rem;
+                margin-bottom: 0 !important;
+            }
+            
+            .contact-section::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: 
+                    radial-gradient(circle at 20% 30%, rgba(0, 255, 255, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 70%, rgba(255, 0, 255, 0.08) 0%, transparent 50%);
+                pointer-events: none;
+                z-index: 1;
+            }
+            
+            .contact-section .container {
+                position: relative;
+                z-index: 2;
             }
 
             /* ビデオ背景スタイル */
@@ -567,18 +615,48 @@
             /* Roboto Mono フォント追加 */
             @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
     
-            /* タイトルアニメーション新スタイル */
+            /* タイトル - 消えかかったネオンライト風 */
             .title-text {
-                color: #fff;
+                color: #ffffff;
                 font-family: 'Tamanegi', 'Roboto Mono', monospace;
-                font-size: 4.5rem; /* レスポンシブサイズ */
-                font-weight: 700;
+                font-size: 4.5rem;
+                font-weight: 400;
                 text-transform: uppercase;
-                transform-origin: bottom;
-                text-shadow: 0 0 15px rgba(255, 255, 255, 0.7), 
-                             0 0 30px rgba(255, 156, 166, 0.5),
-                             0 2px 5px rgba(0, 0, 0, 0.9); /* 文字に光彩効果 */
+                transform-origin: center;
                 margin: 0 auto;
+                position: relative;
+                animation: flickeringNeon 4s infinite;
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #00ffff,
+                    0 0 15px #00ffff,
+                    0 0 20px #00ffff;
+            }
+            
+            @keyframes flickeringNeon {
+                0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                    opacity: 1;
+                    text-shadow: 
+                        0 0 5px #ffffff,
+                        0 0 10px #00ffff,
+                        0 0 15px #00ffff,
+                        0 0 20px #00ffff,
+                        0 0 35px #00ffff,
+                        0 0 40px #00ffff;
+                    color: #ffffff;
+                }
+                20%, 24%, 55% {
+                    opacity: 0.4;
+                    text-shadow: 
+                        0 0 2px #ffffff,
+                        0 0 5px #00ffff;
+                    color: #cccccc;
+                }
+                22% {
+                    opacity: 0.1;
+                    text-shadow: none;
+                    color: #888888;
+                }
             }
             
             @media (max-width: 768px) {
@@ -593,25 +671,7 @@
                 }
             }
             
-            .title-text.is-active {
-                animation: textBounce 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            }
-            
-            @keyframes textBounce {
-                0% {
-                    opacity: 0;
-                    transform: scale(0.3) translateY(150%);
-                }
-                30% {
-                    opacity: 1;
-                }
-                75% {
-                    transform: scale(1.5) translateY(-30%);
-                }
-                100% {
-                    transform: scale(1) translateY(0);
-                }
-            }
+
             
             /* 元の title-animation を非表示にする (新しいアニメーションを使用するため) */
             .title-animation.hidden {
@@ -679,24 +739,171 @@
               animation: jelly 0.6s ease;
             }
             
-            /* 画像コンテナのスタイル調整 */
+            /* サイバーパンク風画像コンテナスタイル */
             .img-container {
               position: relative;
               display: inline-block;
               z-index: 10;
-              box-shadow: 0 20px 40px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.15);
-              border-radius: 6px;
+              border-radius: 8px;
               transition: all 0.4s ease;
+              background: linear-gradient(145deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 255, 0.1));
+              padding: 8px;
+              border: 2px solid rgba(0, 255, 255, 0.3);
+              box-shadow: 
+                0 0 20px rgba(0, 255, 255, 0.4),
+                0 0 40px rgba(255, 0, 255, 0.2),
+                inset 0 0 20px rgba(0, 255, 255, 0.1);
+            }
+            
+            /* シンプルなネオンフレームエフェクト */
+            .img-container::before {
+              content: '';
+              position: absolute;
+              top: -4px;
+              left: -4px;
+              right: -4px;
+              bottom: -4px;
+              background: linear-gradient(45deg, #00ffff, #ff00ff);
+              border-radius: 12px;
+              z-index: -1;
+              opacity: 0.4;
+              transition: opacity 0.3s ease;
             }
             
             .img-container:hover {
-              box-shadow: 0 25px 50px rgba(0,0,0,0.3), 0 15px 25px rgba(0,0,0,0.2);
-              transform: translateY(-8px);
+              transform: translateY(-12px) scale(1.02);
+              border-color: rgba(255, 0, 255, 0.6);
+              box-shadow: 
+                0 0 30px rgba(0, 255, 255, 0.6),
+                0 0 60px rgba(255, 0, 255, 0.4),
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                inset 0 0 30px rgba(0, 255, 255, 0.2);
+            }
+            
+            .img-container:hover::before {
+              opacity: 0.8;
             }
             
             .img-container img {
               border-radius: 6px;
               display: block;
+              width: 100%;
+              height: auto;
+              position: relative;
+              z-index: 1;
+              filter: brightness(1.1) contrast(1.1);
+              transition: filter 0.3s ease;
+            }
+            
+            .img-container:hover img {
+              filter: brightness(1.2) contrast(1.2) saturate(1.1);
+            }
+            
+            /* サイバーパンク風の角の装飾 - シンプル版 */
+            .img-container .corner-decoration {
+              position: absolute;
+              width: 15px;
+              height: 15px;
+              z-index: 3;
+              opacity: 0.8;
+              transition: opacity 0.3s ease;
+            }
+            
+            .img-container:hover .corner-decoration {
+              opacity: 1;
+            }
+            
+            /* 各角のL字装飾 - 正しい方向 */
+            /* 左上角のL字 */
+            .img-container .corner-top-left::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 15px;
+                height: 2px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            .img-container .corner-top-left::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2px;
+                height: 15px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            /* 右上角のL字 */
+            .img-container .corner-top-right::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 15px;
+                height: 2px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            .img-container .corner-top-right::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 2px;
+                height: 15px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            /* 左下角のL字 */
+            .img-container .corner-bottom-left::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 15px;
+                height: 2px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            .img-container .corner-bottom-left::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 2px;
+                height: 15px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            /* 右下角のL字 */
+            .img-container .corner-bottom-right::before {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 15px;
+                height: 2px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
+            }
+            
+            .img-container .corner-bottom-right::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                width: 2px;
+                height: 15px;
+                background: #00ffff;
+                box-shadow: 0 0 3px rgba(0, 255, 255, 0.6);
             }
             
             /* ソーシャルアイコンを大きくする */
@@ -709,7 +916,8 @@
             
             .social a:hover {
                 transform: scale(1.2);
-                color: #FF8CA9 !important;
+                color: #00ffff !important;
+                text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #ff00ff;
             }
             
             .social {
@@ -724,17 +932,41 @@
                 text-align: center;
             }
 
-            /* セクション見出しスタイルの追加 */
+            /* サイバーパンク風セクション見出しスタイル */
             .section-heading-blue {
-                color: #8CD7FF !important;
+                color: #ffffff !important;
                 font-size: 2.5rem; /* 見出しを大きく */
-                font-weight: 700;
+                font-weight: 600;
                 margin-bottom: 1.5rem;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), 
-                             0 0 10px rgba(140, 215, 255, 0.5); /* 青い光彩効果 */
+                text-shadow: 
+                    0 0 3px #ffffff,
+                    0 0 8px #00ffff,
+                    0 0 15px #00ffff,
+                    0 0 25px #00ffff,
+                    0 0 35px #ff00ff,
+                    0 2px 4px rgba(0, 0, 0, 0.5);
                 letter-spacing: 0.5px;
                 position: relative;
                 display: inline-block;
+                animation: headerGlow 3s ease-in-out infinite alternate;
+                -webkit-text-stroke: 0.5px rgba(0, 255, 255, 0.4);
+            }
+            
+            @keyframes headerGlow {
+                from {
+                    text-shadow: 
+                        0 0 5px #00ffff,
+                        0 0 10px #00ffff,
+                        0 0 15px #00ffff,
+                        0 0 20px #ff00ff;
+                }
+                to {
+                    text-shadow: 
+                        0 0 10px #00ffff,
+                        0 0 20px #00ffff,
+                        0 0 25px #00ffff,
+                        0 0 30px #ff00ff;
+                }
             }
             
             /* 見出しの下線装飾 */
@@ -761,16 +993,22 @@
             
             /* プロジェクトセクションの見出し */
             .projects-section .text-reveal-title {
-                color: #8CD7FF !important;
+                color: #ffffff !important;
                 font-size: 1.8rem !important;
-                font-weight: 700;
-                text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3),
-                             0 0 8px rgba(140, 215, 255, 0.4); /* 青い光彩効果 */
+                font-weight: 600;
+                text-shadow: 
+                    0 0 3px #ffffff,
+                    0 0 8px #00ffff,
+                    0 0 15px #00ffff,
+                    0 0 25px #00ffff,
+                    0 0 35px #ff00ff,
+                    0 2px 4px rgba(0, 0, 0, 0.5);
                 letter-spacing: 0.5px;
                 position: relative;
                 display: inline-block;
                 padding-bottom: 6px;
                 margin-bottom: 8px;
+                -webkit-text-stroke: 0.3px rgba(0, 255, 255, 0.3);
             }
             
             /* プロジェクト見出しの下線装飾 */
@@ -796,9 +1034,15 @@
             /* プロジェクトセクションの説明テキスト */
             .projects-section .text-reveal-body {
                 font-size: 1.15rem !important;
-                line-height: 1.6;
-                text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2); /* 読みやすさ向上 */
-                letter-spacing: 0.2px;
+                line-height: 1.7;
+                color: rgba(255, 255, 255, 0.95) !important;
+                text-shadow: 
+                    0 0 2px rgba(255, 255, 255, 0.8),
+                    0 0 5px rgba(0, 255, 255, 0.4),
+                    0 0 8px rgba(0, 255, 255, 0.2),
+                    0 1px 3px rgba(0, 0, 0, 0.5);
+                letter-spacing: 0.3px;
+                font-weight: 400;
             }
             
             /* プロジェクトセクションの黒背景に対する調整 */
@@ -821,7 +1065,8 @@
             
             /* 黒背景削除後のテキスト色調整 */
             .projects-section .text-white-50 {
-                color: rgba(255, 255, 255, 0.8) !important;
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-shadow: 0 0 2px rgba(255, 255, 255, 0.5), 0 0 5px rgba(0, 255, 255, 0.3);
             }
             
             /* プロジェクトテキストコンテナに軽い装飾 */
@@ -855,9 +1100,24 @@
             /* ナビゲーションバーの日本語フォント対応 */
             .navbar-brand {
                 font-family: 'Tamanegi', var(--font-pop);
-                font-weight: 700;
+                font-weight: 500;
                 font-size: 1.5rem;
                 letter-spacing: 0.5px;
+                color: #ffffff !important;
+                text-shadow: 
+                    0 0 3px #ffffff,
+                    0 0 8px #00ffff,
+                    0 0 15px #00ffff;
+                transition: all 0.3s ease;
+            }
+            
+            .navbar-brand:hover {
+                color: #00ffff !important;
+                text-shadow: 
+                    0 0 5px #ffffff,
+                    0 0 10px #00ffff,
+                    0 0 20px #00ffff,
+                    0 0 30px #ff00ff;
             }
             
             .navbar .nav-link {
@@ -887,7 +1147,7 @@
                 }
             }
 
-            /* ノーツボタンのスタイル */
+            /* ノーツボタンのスタイル - サイバーパンク風 */
             .note-btn-container {
                 position: relative;
                 display: inline-block;
@@ -895,11 +1155,23 @@
                 height: 100px;
                 cursor: pointer;
                 margin-top: 20px;
-                transition: transform 0.3s ease;
+                transition: transform 0.3s ease, filter 0.3s ease;
+                filter: drop-shadow(0 0 10px rgba(0, 255, 255, 0.5));
             }
             
             .note-btn-container:hover {
                 transform: scale(1.1);
+                filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
+                animation: noteGlow 1s ease-in-out infinite alternate;
+            }
+            
+            @keyframes noteGlow {
+                from {
+                    filter: drop-shadow(0 0 20px rgba(255, 0, 255, 0.8)) drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
+                }
+                to {
+                    filter: drop-shadow(0 0 30px rgba(255, 0, 255, 1)) drop-shadow(0 0 40px rgba(0, 255, 255, 0.8));
+                }
             }
             
             .note-btn {
@@ -990,6 +1262,165 @@
             
             .resetting {
                 animation: resetNote 0.5s forwards;
+            }
+
+            /* サイバーパンク風お問い合わせカードスタイル */
+            .cyber-card {
+                background: linear-gradient(145deg, rgba(10, 10, 35, 0.8), rgba(26, 0, 51, 0.8));
+                border: 2px solid rgba(0, 255, 255, 0.3);
+                border-radius: 12px;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s ease;
+                box-shadow: 
+                    0 8px 32px rgba(0, 255, 255, 0.15),
+                    0 4px 16px rgba(255, 0, 255, 0.1),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+                backdrop-filter: blur(10px);
+            }
+            
+            .cyber-card::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: linear-gradient(45deg, rgba(0, 255, 255, 0.05), rgba(255, 0, 255, 0.05));
+                z-index: -1;
+            }
+            
+            .cyber-card:hover {
+                transform: translateY(-8px);
+                border-color: rgba(0, 255, 255, 0.6);
+                box-shadow: 
+                    0 16px 48px rgba(0, 255, 255, 0.25),
+                    0 8px 24px rgba(255, 0, 255, 0.15),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+            
+            .cyber-icon {
+                font-size: 2.5rem !important;
+                color: #00ffff !important;
+                text-shadow: 0 0 15px #00ffff, 0 0 30px #00ffff;
+                transition: all 0.3s ease;
+            }
+            
+            .cyber-card:hover .cyber-icon {
+                color: #ff00ff !important;
+                text-shadow: 0 0 20px #ff00ff, 0 0 40px #ff00ff;
+                transform: scale(1.1);
+            }
+            
+            .cyber-title {
+                color: #ffffff !important;
+                font-weight: 600;
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.8),
+                    0 0 10px rgba(0, 255, 255, 0.4);
+                letter-spacing: 0.5px;
+                margin-bottom: 0 !important;
+            }
+            
+            .cyber-divider {
+                width: 60px;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #00ffff, transparent);
+                margin: 1rem auto !important;
+                position: relative;
+                box-shadow: 0 0 10px #00ffff;
+            }
+            
+            .cyber-divider::before {
+                content: '';
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                width: 6px;
+                height: 6px;
+                background: #00ffff;
+                border-radius: 50%;
+                box-shadow: 0 0 8px #00ffff;
+            }
+            
+            .cyber-text {
+                color: rgba(255, 255, 255, 0.9) !important;
+                text-shadow: 0 0 3px rgba(255, 255, 255, 0.5);
+                font-weight: 400;
+            }
+            
+            .cyber-link {
+                color: #00ffff !important;
+                text-decoration: none !important;
+                text-shadow: 0 0 8px #00ffff;
+                transition: all 0.3s ease;
+            }
+            
+            .cyber-link:hover {
+                color: #ff00ff !important;
+                text-shadow: 0 0 12px #ff00ff;
+                transform: scale(1.05);
+            }
+            
+            /* サイバーパンク風フッタースタイル */
+            .cyber-footer {
+                background: linear-gradient(135deg, #000000 0%, #1a0033 50%, #000a1a 100%);
+                position: relative;
+                padding: 1.5rem 0;
+                overflow: hidden;
+                margin: 0;
+            }
+            
+            .cyber-footer::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                height: 1px;
+                background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #00ffff, transparent);
+                box-shadow: 0 0 10px #00ffff;
+            }
+            
+            .footer-content {
+                position: relative;
+                z-index: 2;
+            }
+            
+            .footer-glow {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 300px;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, transparent);
+                opacity: 0.3;
+                z-index: 1;
+                animation: footerPulse 3s ease-in-out infinite;
+            }
+            
+            @keyframes footerPulse {
+                0%, 100% { 
+                    opacity: 0.3; 
+                    transform: translate(-50%, -50%) scaleX(1);
+                }
+                50% { 
+                    opacity: 0.6; 
+                    transform: translate(-50%, -50%) scaleX(1.2);
+                }
+            }
+            
+            .footer-text {
+                color: rgba(255, 255, 255, 0.8) !important;
+                text-shadow: 
+                    0 0 5px rgba(255, 255, 255, 0.5),
+                    0 0 10px rgba(0, 255, 255, 0.3);
+                font-weight: 400;
+                letter-spacing: 0.5px;
+                position: relative;
+                z-index: 3;
             }
         </style>
     </head>
@@ -1087,6 +1518,10 @@
                 <div class="row gx-0 mb-4 mb-lg-5 align-items-center parallax-container">
                     <div class="col-xl-8 col-lg-7">
                         <div class="img-container">
+                            <div class="corner-decoration corner-top-left"></div>
+                            <div class="corner-decoration corner-top-right"></div>
+                            <div class="corner-decoration corner-bottom-left"></div>
+                            <div class="corner-decoration corner-bottom-right"></div>
                             <img class="img-fluid mb-3 mb-lg-0" src="assets/img/Image-1.jpg" alt="ゲームプレイイメージ 1" />
                         </div>
                     </div>
@@ -1102,6 +1537,10 @@
                 <div class="row gx-0 mb-5 mb-lg-0 justify-content-center parallax-container">
                     <div class="col-lg-6">
                         <div class="img-container">
+                            <div class="corner-decoration corner-top-left"></div>
+                            <div class="corner-decoration corner-top-right"></div>
+                            <div class="corner-decoration corner-bottom-left"></div>
+                            <div class="corner-decoration corner-bottom-right"></div>
                             <img class="img-fluid" src="assets/img/image-2.png" alt="ゲーム内画面例 2" />
                         </div>
                     </div>
@@ -1121,6 +1560,10 @@
                 <div class="row gx-0 justify-content-center parallax-container">
                     <div class="col-lg-6">
                         <div class="img-container">
+                            <div class="corner-decoration corner-top-left"></div>
+                            <div class="corner-decoration corner-top-right"></div>
+                            <div class="corner-decoration corner-bottom-left"></div>
+                            <div class="corner-decoration corner-bottom-right"></div>
                             <img class="img-fluid" src="assets/img/image-3.jpg" alt="ゲーム内画面例 3" />
                         </div>
                     </div>
@@ -1164,36 +1607,36 @@
             </div>
         </section>
         <!-- お問い合わせ / 連絡先セクション -->
-        <section class="contact-section bg-black">
+        <section class="contact-section">
             <div class="container px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5">
                     <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
+                        <div class="cyber-card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">東北電子専門学校</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">ゲームエンジニア科3年</div>
+                                <i class="fas fa-map-marked-alt cyber-icon mb-3"></i>
+                                <h4 class="text-uppercase m-0 cyber-title">東北電子専門学校</h4>
+                                <div class="cyber-divider my-3"></div>
+                                <div class="small cyber-text">ゲームエンジニア科3年</div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
+                        <div class="cyber-card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-envelope text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Email</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50"><a href="mailto:230169@jc-21.jp">230169@jc-21.jp</a></div>
+                                <i class="fas fa-envelope cyber-icon mb-3"></i>
+                                <h4 class="text-uppercase m-0 cyber-title">Email</h4>
+                                <div class="cyber-divider my-3"></div>
+                                <div class="small cyber-text"><a href="mailto:230169@jc-21.jp" class="cyber-link">230169@jc-21.jp</a></div>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 mb-3 mb-md-0">
-                        <div class="card py-4 h-100">
+                        <div class="cyber-card py-4 h-100">
                             <div class="card-body text-center">
-                                <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                                <h4 class="text-uppercase m-0">Phone</h4>
-                                <hr class="my-4 mx-auto" />
-                                <div class="small text-black-50">+81 (080) 8843-1022</div>
+                                <i class="fas fa-mobile-alt cyber-icon mb-3"></i>
+                                <h4 class="text-uppercase m-0 cyber-title">Phone</h4>
+                                <div class="cyber-divider my-3"></div>
+                                <div class="small cyber-text">+81 (080) 8843-1022</div>
                             </div>
                         </div>
                     </div>
@@ -1205,7 +1648,14 @@
             </div>
         </section>
         <!-- フッター -->
-        <footer class="footer bg-black small text-center text-white-50"><div class="container px-4 px-lg-5">Copyright &copy; Team Slash Blade</div></footer>
+        <footer class="cyber-footer small text-center">
+            <div class="container px-4 px-lg-5">
+                <div class="footer-content">
+                    <div class="footer-glow"></div>
+                    <div class="footer-text">Copyright &copy; Team Slash Blade</div>
+                </div>
+            </div>
+        </footer>
         <!-- 右下固定表示QRコード (クリックで拡大) -->
         <div id="qr-fixed" aria-label="QRコード (クリックで拡大)" role="button" tabindex="0">
             <img src="assets/qrcode.png" alt="QRコード">
@@ -1247,27 +1697,7 @@
                 }, 300);
             })();
             
-            /* === タイトルテキストアニメーション === */
-            (function() {
-                const titleText = document.querySelector('.title-text');
-                if (!titleText) return;
-                
-                // 初回アニメーション
-                setTimeout(() => {
-                    titleText.classList.add('is-active');
-                    
-                    // 定期的にアニメーションを繰り返す（オプション）
-                    setInterval(() => {
-                        titleText.classList.remove('is-active');
-                        
-                        // リセット後、再度アニメーション開始
-                        setTimeout(() => {
-                            titleText.classList.add('is-active');
-                        }, 100);
-                    }, 5000); // 5秒ごとに繰り返し
-                    
-                }, 3000); // カーテンアニメーション後に開始
-            })();
+
         </script>
         
         <script>
@@ -1516,7 +1946,5 @@
                 }
             });
         </script>
-        
-        <!-- ...existing code... -->
     </body>
 </html>
