@@ -42,6 +42,10 @@ window.addEventListener('DOMContentLoaded', event => {
         const videos = document.querySelectorAll('video');
         
         videos.forEach(video => {
+            // iOS Safari対応
+            video.setAttribute('webkit-playsinline', '');
+            video.setAttribute('playsinline', '');
+            
             // 動画読み込みエラー時のフォールバック
             video.addEventListener('error', function(e) {
                 console.warn('Video playback failed, attempting fallback:', e);
@@ -59,53 +63,80 @@ window.addEventListener('DOMContentLoaded', event => {
             // 動画が読み込めない場合の最終フォールバック
             video.addEventListener('loadstart', function() {
                 setTimeout(() => {
-                    if (this.readyState === 0) {
+                    if (this.readyState === 0 || this.networkState === this.NETWORK_NO_SOURCE) {
                         console.warn('Video failed to load, showing fallback');
                         handleVideoError(this);
                     }
-                }, 3000); // 3秒待機
+                }, 5000); // 5秒待機に延長
+            });
+
+            // 動画読み込み完了時の処理
+            video.addEventListener('canplaythrough', function() {
+                console.log('Video can play through:', this.id);
+                // フォールバック画像を非表示
+                if (this.id === 'background-video') {
+                    const fallbackImg = document.getElementById('video-fallback-img');
+                    if (fallbackImg) {
+                        fallbackImg.style.display = 'none';
+                    }
+                }
             });
 
             // モバイルデバイスでの自動再生対応
-            if (isMobileDevice()) {
-                video.addEventListener('canplay', function() {
-                    const playPromise = this.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.warn('Autoplay failed on mobile:', error);
-                            // モバイルでは静止画像を表示
-                            handleVideoError(this);
+            video.addEventListener('loadedmetadata', function() {
+                const playPromise = this.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        console.log('Video autoplay started successfully:', this.id);
+                    }).catch(error => {
+                        console.warn('Autoplay failed:', error);
+                        // 自動再生に失敗した場合でも動画要素は表示を続ける
+                        // ユーザーインタラクション後の再生を期待
+                        this.addEventListener('click', function() {
+                            this.play().catch(e => console.warn('Manual play failed:', e));
                         });
-                    }
-                });
-            }
+                    });
+                }
+            });
         });
     }
 
     function handleVideoError(video) {
         const parent = video.parentElement;
-        const fallback = video.querySelector('.video-fallback, img');
+        
+        // 背景動画の場合、既存のフォールバック画像を使用
+        if (video.id === 'background-video') {
+            const existingFallback = document.getElementById('video-fallback-img');
+            if (existingFallback) {
+                existingFallback.style.display = 'block';
+                video.style.display = 'none';
+                console.log('Showing video fallback image');
+                return;
+            }
+        }
+        
+        // 他の動画またはフォールバック画像が見つからない場合
+        const fallback = parent.querySelector('img[id$="fallback-img"], img');
         
         if (fallback) {
-            // フォールバック要素がある場合は表示
+            // 既存のフォールバック要素がある場合は表示
             fallback.style.display = 'block';
             video.style.display = 'none';
         } else {
             // フォールバック画像を動的に作成
             const img = document.createElement('img');
             if (video.id === 'background-video') {
-                img.src = 'assets/img/video-fallback.jpg';
+                img.src = 'assets/img/Title.png';
                 img.alt = 'ゲーム背景画像';
+                img.id = 'dynamic-video-fallback';
             } else {
-                img.src = 'assets/img/manual-fallback.jpg';
+                img.src = 'assets/img/image-2.png';
                 img.alt = 'ゲーム説明画像';
+                img.id = 'dynamic-manual-fallback';
             }
-            img.className = video.className;
-            img.style.width = '100%';
-            img.style.height = '100%';
-            img.style.objectFit = 'cover';
+            img.style.cssText = 'display:block;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;';
             
-            parent.insertBefore(img, video);
+            parent.appendChild(img);
             video.style.display = 'none';
         }
     }
