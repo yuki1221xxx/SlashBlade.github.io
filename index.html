@@ -1445,15 +1445,13 @@
         <header class="masthead parallax curtain-animation" data-parallax-speed="0.15">
             <!-- ビデオ背景を追加 -->
             <div class="video-background">
-                <video autoplay loop muted playsinline id="background-video">
+                <video autoplay loop muted playsinline id="background-video" poster="assets/img/video-fallback.jpg" style="display:block;width:100%;height:100%;object-fit:contain;">
                     <source src="assets/video/prod_game.mp4" type="video/mp4">
                     <source src="assets/video/prod_game.webm" type="video/webm">
                     <source src="assets/video/prod_game.ogv" type="video/ogg">
-                    <!-- ビデオがサポートされていない場合のフォールバック -->
-                    <div class="video-fallback">
-                        <img src="assets/img/video-fallback.jpg" alt="ゲーム画面" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
                 </video>
+                <!-- スマホ等でvideoが再生できない場合のフォールバック画像 -->
+                <img id="video-fallback-img" src="assets/img/video-fallback.jpg" alt="ゲーム画面" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
                 <div class="video-overlay"></div>
             </div>
             
@@ -1724,7 +1722,35 @@
             
 
         </script>
-        
+        <script>
+            // 動画が再生できない場合のフォールバック処理
+            (function() {
+                const video = document.getElementById('background-video');
+                const fallbackImg = document.getElementById('video-fallback-img');
+                if (!video || !fallbackImg) return;
+
+                function showFallback() {
+                    video.style.display = 'none';
+                    fallbackImg.style.display = 'block';
+                }
+
+                // iOSやAndroidの一部ブラウザではvideoが自動再生できない場合がある
+                // 再生できなければフォールバック画像を表示
+                video.addEventListener('error', showFallback);
+                video.addEventListener('stalled', showFallback);
+                video.addEventListener('abort', showFallback);
+
+                // iOS Safari等で自動再生がブロックされる場合
+                video.play().catch(showFallback);
+
+                // 動画が再生できているかチェック（再生できなければ画像表示）
+                setTimeout(() => {
+                    if (video.readyState < 2 || video.paused) {
+                        showFallback();
+                    }
+                }, 1200);
+            })();
+        </script>
         <script>
             // QRオーバーレイ制御 (アクセシビリティ対応)
             (function() {
