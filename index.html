@@ -1445,10 +1445,14 @@
         <header class="masthead parallax curtain-animation" data-parallax-speed="0.15">
             <!-- ビデオ背景を追加 -->
             <div class="video-background">
-                <video autoplay loop muted playsinline>
+                <video autoplay loop muted playsinline id="background-video">
                     <source src="assets/video/prod_game.mp4" type="video/mp4">
+                    <source src="assets/video/prod_game.webm" type="video/webm">
+                    <source src="assets/video/prod_game.ogv" type="video/ogg">
                     <!-- ビデオがサポートされていない場合のフォールバック -->
-                    お使いのブラウザはビデオ再生をサポートしていません。
+                    <div class="video-fallback">
+                        <img src="assets/img/video-fallback.jpg" alt="ゲーム画面" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
                 </video>
                 <div class="video-overlay"></div>
             </div>
@@ -1530,7 +1534,10 @@
                         <div class="img-container">
                             <video class="img-fluid mb-3 mb-lg-0" autoplay loop muted playsinline>
                                 <source src="assets/video/manualVideo.mp4" type="video/mp4">
-                                お使いのブラウザはビデオ再生をサポートしていません。
+                                <source src="assets/video/manualVideo.webm" type="video/webm">
+                                <source src="assets/video/manualVideo.ogv" type="video/ogg">
+                                <!-- フォールバック画像 -->
+                                <img src="assets/img/manual-fallback.jpg" alt="ゲーム操作説明" class="img-fluid">
                             </video>
                         </div>
                     </div>
@@ -1634,7 +1641,7 @@
                                 <i class="fas fa-envelope cyber-icon mb-3"></i>
                                 <h4 class="text-uppercase m-0 cyber-title">竹田 光秀</h4>
                                 <div class="cyber-divider my-3"></div>
-                                <div class="small cyber-text"><a href="mailto:230645@jc-21.jp" class="cyber-link">230063@jc-21.jp</a></div>
+                                <div class="small cyber-text"><a href="mailto:230645@jc-21.jp" class="cyber-link">230645@jc-21.jp</a></div>
                             </div>
                         </div>
                     </div>
@@ -1644,7 +1651,7 @@
                                 <i class="fas fa-envelope cyber-icon mb-3"></i>
                                 <h4 class="text-uppercase m-0 cyber-title">佐藤 光太郎</h4>
                                 <div class="cyber-divider my-3"></div>
-                                <div class="small cyber-text"><a href="mailto:230011@jc-21.jp" class="cyber-link">230169@jc-21.jp</a></div>
+                                <div class="small cyber-text"><a href="mailto:230011@jc-21.jp" class="cyber-link">230011@jc-21.jp</a></div>
                             </div>
                         </div>
                     </div>
@@ -1660,7 +1667,7 @@
                     </div>
                 </div>
                 <div class="social d-flex justify-content-center">
-                    <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                    <a class="mx-2" href="https://x.com/Rhythm230063"><i class="fab fa-twitter"></i></a>
                     <a class="mx-2" href="https://github.com/yuki1221xxx/yuki1221xxx.github.io"><i class="fab fa-github"></i></a>
                 </div>
             </div>
