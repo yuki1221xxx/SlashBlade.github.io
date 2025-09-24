@@ -577,7 +577,7 @@
                 z-index: 2;
             }
 
-            /* ビデオ背景スタイル */
+            /* ビデオ背景スタイル - 全端末対応版 */
             .video-background {
                 position: absolute;
                 top: 0;
@@ -586,7 +586,7 @@
                 height: 100%;
                 overflow: hidden;
                 z-index: -1;
-                background-color: #000000; /* 動画がカバーしない部分の背景色 */
+                background-color: #000000;
                 display: flex;
                 align-items: center;
                 justify-content: center;
@@ -595,10 +595,35 @@
             .video-background video {
                 width: 100%;
                 height: 100%;
-                max-width: 100%;
-                max-height: 100%;
-                object-fit: contain; /* 動画全体を表示 */
-                object-position: center center; /* 動画を中央配置 */
+                object-fit: cover;
+                object-position: center center;
+                background-color: transparent;
+            }
+            
+            .video-background img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                object-position: center center;
+            }
+            
+            /* モバイル端末での動画最適化 */
+            @media (max-width: 768px) {
+                .video-background video {
+                    object-fit: cover;
+                    width: 100%;
+                    height: 100%;
+                    min-width: 100%;
+                    min-height: 100%;
+                }
+            }
+            
+            /* iOS Safari対応 */
+            @media (max-width: 768px) and (-webkit-min-device-pixel-ratio: 1) {
+                .video-background video {
+                    transform: translateZ(0);
+                    -webkit-transform: translateZ(0);
+                }
             }
             
             /* ビデオオーバーレイ */
@@ -754,6 +779,17 @@
                 0 0 20px rgba(0, 255, 255, 0.4),
                 0 0 40px rgba(255, 0, 255, 0.2),
                 inset 0 0 20px rgba(0, 255, 255, 0.1);
+              width: 100%;
+              overflow: hidden;
+            }
+            
+            /* 動画コンテナ内の動画スタイル */
+            .img-container video {
+              width: 100%;
+              height: auto;
+              border-radius: 4px;
+              background-color: #000;
+              object-fit: cover;
             }
             
             /* シンプルなネオンフレームエフェクト */
@@ -1445,13 +1481,13 @@
         <header class="masthead parallax curtain-animation" data-parallax-speed="0.15">
             <!-- ビデオ背景を追加 -->
             <div class="video-background">
-                <video autoplay muted loop playsinline id="background-video" poster="assets/img/video-fallback.jpg" style="display:block;width:100%;height:100%;object-fit:contain;">
+                <video autoplay muted loop playsinline controls="false" preload="auto" id="background-video" poster="assets/img/Title.png" style="display:block;width:100%;height:100%;object-fit:cover;">
                     <source src="assets/video/prod_game.mp4" type="video/mp4">
-                    <source src="assets/video/prod_game.webm" type="video/webm">
-                    <source src="assets/video/prod_game.ogv" type="video/ogg">
+                    <!-- ブラウザがmp4をサポートしていない場合のフォールバック -->
+                    お使いのブラウザは動画再生をサポートしていません。
                 </video>
                 <!-- フォールバック画像はvideoタグの外に配置 -->
-                <img id="video-fallback-img" src="assets/img/video-fallback.jpg" alt="ゲーム画面" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
+                <img id="video-fallback-img" src="assets/img/Title.png" alt="ゲーム画面" style="display:none;width:100%;height:100%;object-fit:cover;position:absolute;top:0;left:0;z-index:1;">
                 <div class="video-overlay"></div>
             </div>
             
@@ -1530,13 +1566,13 @@
                 <div class="row gx-0 mb-4 mb-lg-5 align-items-center parallax-container">
                     <div class="col-xl-8 col-lg-7">
                         <div class="img-container">
-                            <video class="img-fluid mb-3 mb-lg-0" autoplay muted loop playsinline poster="assets/img/manual-fallback.jpg" id="manual-video">
+                            <video class="img-fluid mb-3 mb-lg-0" autoplay muted loop playsinline controls="false" preload="auto" poster="assets/img/image-2.png" id="manual-video" style="width:100%;height:auto;object-fit:cover;">
                                 <source src="assets/video/manualVideo.mp4" type="video/mp4">
-                                <source src="assets/video/manualVideo.webm" type="video/webm">
-                                <source src="assets/video/manualVideo.ogv" type="video/ogg">
+                                <!-- ブラウザがmp4をサポートしていない場合のフォールバック -->
+                                お使いのブラウザは動画再生をサポートしていません。
                             </video>
                             <!-- フォールバック画像はvideoタグの外に配置 -->
-                            <img id="manual-fallback-img" src="assets/img/manual-fallback.jpg" alt="ゲーム操作説明" class="img-fluid" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:2;">
+                            <img id="manual-fallback-img" src="assets/img/image-2.png" alt="ゲーム操作説明" class="img-fluid" style="display:none;position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:2;">
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-5 reveal-on-scroll project-reveal">
@@ -1723,40 +1759,117 @@
 
         </script>
         <script>
-            // 動画が再生できない場合のフォールバック処理
+            // 動画が再生できない場合のフォールバック処理 - 全端末対応版
             (function() {
-                // トップ動画
-                const video = document.getElementById('background-video');
-                const fallbackImg = document.getElementById('video-fallback-img');
-                if (video && fallbackImg) {
+                // 動画を安全に再生する関数
+                function safeVideoPlay(video, fallbackImg) {
+                    if (!video || !fallbackImg) return;
+                    
+                    let playAttempted = false;
+                    let fallbackShown = false;
+                    
                     function showFallback() {
+                        if (fallbackShown) return;
+                        fallbackShown = true;
+                        console.log('Showing fallback for video:', video.id);
                         video.style.display = 'none';
                         fallbackImg.style.display = 'block';
                     }
+                    
+                    function attemptPlay() {
+                        if (playAttempted) return;
+                        playAttempted = true;
+                        
+                        // 動画が読み込まれていない場合
+                        if (video.readyState === 0) {
+                            video.load();
+                        }
+                        
+                        // 再生を試行
+                        const playPromise = video.play();
+                        if (playPromise !== undefined) {
+                            playPromise.then(() => {
+                                console.log('Video playing successfully:', video.id);
+                            }).catch((error) => {
+                                console.log('Video play failed:', video.id, error);
+                                showFallback();
+                            });
+                        }
+                    }
+                    
+                    // イベントリスナーを設定
                     video.addEventListener('error', showFallback);
                     video.addEventListener('stalled', showFallback);
                     video.addEventListener('abort', showFallback);
-                    video.play().catch(showFallback);
+                    video.addEventListener('loadstart', attemptPlay);
+                    video.addEventListener('loadeddata', attemptPlay);
+                    video.addEventListener('canplay', attemptPlay);
+                    
+                    // タイムアウト処理 - より長めに設定
                     setTimeout(() => {
-                        if (video.readyState < 2 || video.paused) showFallback();
-                    }, 1200);
-                }
-
-                // 遊び方動画
-                const manualVideo = document.getElementById('manual-video');
-                const manualFallback = document.getElementById('manual-fallback-img');
-                if (manualVideo && manualFallback) {
-                    function showManualFallback() {
-                        manualVideo.style.display = 'none';
-                        manualFallback.style.display = 'block';
+                        if (video.readyState < 2 || video.paused || video.currentTime === 0) {
+                            console.log('Video timeout, showing fallback:', video.id);
+                            showFallback();
+                        }
+                    }, 3000);
+                    
+                    // 初期読み込み開始
+                    try {
+                        video.load();
+                        attemptPlay();
+                    } catch (e) {
+                        console.log('Initial play attempt failed:', video.id, e);
+                        showFallback();
                     }
-                    manualVideo.addEventListener('error', showManualFallback);
-                    manualVideo.addEventListener('stalled', showManualFallback);
-                    manualVideo.addEventListener('abort', showManualFallback);
-                    manualVideo.play().catch(showManualFallback);
-                    setTimeout(() => {
-                        if (manualVideo.readyState < 2 || manualVideo.paused) showManualFallback();
-                    }, 1200);
+                }
+                
+                // DOM読み込み完了後に実行
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', initVideos);
+                } else {
+                    initVideos();
+                }
+                
+                function initVideos() {
+                    // トップ動画
+                    const video = document.getElementById('background-video');
+                    const fallbackImg = document.getElementById('video-fallback-img');
+                    if (video && fallbackImg) {
+                        // モバイル端末での自動再生制限を考慮
+                        video.muted = true;
+                        video.playsInline = true;
+                        video.setAttribute('playsinline', '');
+                        video.setAttribute('webkit-playsinline', '');
+                        safeVideoPlay(video, fallbackImg);
+                    }
+
+                    // 遊び方動画
+                    const manualVideo = document.getElementById('manual-video');
+                    const manualFallback = document.getElementById('manual-fallback-img');
+                    if (manualVideo && manualFallback) {
+                        // モバイル端末での自動再生制限を考慮
+                        manualVideo.muted = true;
+                        manualVideo.playsInline = true;
+                        manualVideo.setAttribute('playsinline', '');
+                        manualVideo.setAttribute('webkit-playsinline', '');
+                        safeVideoPlay(manualVideo, manualFallback);
+                    }
+                    
+                    // 追加: Intersection Observer で遊び方動画の読み込みを遅延
+                    if ('IntersectionObserver' in window && manualVideo) {
+                        const observer = new IntersectionObserver((entries) => {
+                            entries.forEach(entry => {
+                                if (entry.isIntersecting) {
+                                    const video = entry.target;
+                                    if (video.readyState === 0) {
+                                        video.load();
+                                    }
+                                    observer.unobserve(video);
+                                }
+                            });
+                        }, { threshold: 0.1 });
+                        observer.observe(manualVideo);
+                    }
                 }
             })();
         </script>
